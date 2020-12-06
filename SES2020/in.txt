@@ -1,17 +1,23 @@
 
-int func sum(int a, int b)
+int func sum(int x, int y)
 {
-	poo int z = a + b;
+	poo int z;
+	z = x + y;
 	out(z);
+	return z;
 }
 
-main()
+main
 {
-	poo int a = 2;
-	poo int b = 5;
+	poo int a;
+	poo int b;
+	a = 2;
+	b = 10;
 	twirl(a < b)
 	{
 		a = a + 1;
 	}
 	out('complete');
+
+	return a;
 }

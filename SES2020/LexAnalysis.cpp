@@ -44,13 +44,13 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 		
 		case '+':
 		{
-			LT::Add(lextable, { LEX_PLUS, strNumber, LT_TI_NULLIDX, (char*)"+" });
+			LT::Add(lextable, { LEX_PLUS, strNumber, LT_TI_NULLIDX });
 			return true;
 		}
 
 		case '-':
 		{
-			LT::Add(lextable, { LEX_MINUS, strNumber, LT_TI_NULLIDX, (char*)"-" });
+			LT::Add(lextable, { LEX_MINUS, strNumber, LT_TI_NULLIDX });
 			return true;
 		}
 
@@ -233,7 +233,7 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 			FST::FST* a_out = new FST::FST(A_OUT(token));
 			if (FST::execute(*a_out))
 			{
-				LT::Add(lextable, { LEX_PRINT, strNumber, LT_TI_NULLIDX });
+				LT::Add(lextable, { LEX_OUT, strNumber, LT_TI_NULLIDX });
 				delete a_out;
 				a_out = nullptr;
 				return true;

@@ -18,4 +18,6 @@
 #include "LT.h"
 #include "LexAnalysis.h"
 #include "Graph.h"
+#include "GRB.h"
+#include "MFST.h"
 
