@@ -1,0 +1,17 @@
+
+int func sum(int a, int b)
+{
+	poo int z = a + b;
+	out(z);
+}
+
+main()
+{
+	poo int a = 2;
+	poo int b = 5;
+	twirl(a < b)
+	{
+		a = a + 1;
+	}
+	out('complete');
+}

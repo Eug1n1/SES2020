@@ -1,5 +1,7 @@
 #pragma once
-#include <tchar.h>
+
+#include "pch.h"
+
 #define PARM_MAX_SIZE 300			
 #define PARM_IN  L"-in:"					// ключ для файла исходного кода
 #define PARM_OUT L"-out:"					// ключ для файла объектного кода	
@@ -10,6 +12,7 @@
 #define PARM_LOG_DEFAULT_EXT L".log"		// расширение файла протокола по умолчанию
 #define PARM_LEX_DEFAULT_EXT  L".lex"
 #define PARM_SYN_DEFAULT_EXT  L".syn"
+#define PARM_ID_DEFAULT_EXT L".id"
 
 namespace Parm
 {

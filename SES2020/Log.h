@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
-
+#include "In.h"
 namespace Log	//Работа с протоколом
 {
 	struct LOG	//протокол
@@ -13,8 +13,8 @@ namespace Log	//Работа с протоколом
 	void WriteLine(LOG log, const char* c, ...);	// вывести в протокол конкатенацию строк
 	void WriteLine(LOG log, const wchar_t* c, ...);	// вывести в протокол конкатенацию строк
 	void WriteLog(LOG log);							// вывести в протокол заголовок
-	void WriteParm(LOG log, Parm::PARM parm);		// вывести в протокол информацию о входных параметрах
-	//void WriteIn(LOG log, In::IN in);				// вывести в протокол информацию о входном потоке
+	void WriteParm(LOG log, Parm::PARM parm);       // вывести в протокол информацию о входных параметрах
+	void WriteIn(LOG log, In::IN in);				// вывести в протокол информацию о входном потоке
 	void WriteError(LOG log, Error::ERROR error);	// вывести в протокол информацию об ошибке
 	void Close(LOG log);							// закрыть протокол
 };
