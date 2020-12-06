@@ -1,5 +1,4 @@
-#include "Error.h"
-#include "Log.h"
+#include "pch.h"
 
 namespace Log {
 	LOG Getlog(wchar_t logfile[]) {
@@ -52,12 +51,12 @@ namespace Log {
 		sprintf_s(str, "%ws", parm.in);
 		*log.stream << "-int: " << str << std::endl;
 	}
-	/*void WriteIn(LOG log, In::IN in) {
+	void WriteIn(LOG log, In::IN in) {
 		*log.stream << "---- Исходные данные ----\n";
 		*log.stream << "Количество символов: " << in.size << std::endl;
 		*log.stream << "Проигнорировано: " << in.ignor << std::endl;
 		*log.stream << "Количество строк: " << in.lines << std::endl;
-	}*/
+	}
 	void WriteError(LOG log, Error::ERROR error) {
 		if (!log.stream)
 			std::cout << "Ошибка " << error.id << ": " << error.message << ", строка " << error.inext.line;
