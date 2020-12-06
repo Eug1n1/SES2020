@@ -13,7 +13,7 @@
 #define LEX_MAINFUNC 'm'
 #define LEX_DECLARE 'd'
 #define LEX_RETURN 'r'
-#define LEX_PRINT 'p'
+#define LEX_OUT 'o'
 #define LEX_SEMICOLON ';'
 #define LEX_COMMA ','
 #define LEX_LEFTBRACE '{'
