@@ -2,6 +2,7 @@
 int func sum(int x, int y)
 {
 	poo int z;
+	z = sum(2, 2);
 	z = x + y;
 	out(z);
 	return z;
@@ -13,7 +14,7 @@ main
 	poo int b;
 	a = 2;
 	b = 10;
-	twirl(a < b)
+	twirl(a <= b)
 	{
 		a = a + 1;
 	}

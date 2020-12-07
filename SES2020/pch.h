@@ -8,6 +8,7 @@
 #include <ctime>
 #include <queue>
 #include <iomanip>
+#include <stack>
 
 #include "Parameters.h"
 #include "Error.h"
@@ -20,4 +21,8 @@
 #include "Graph.h"
 #include "GRB.h"
 #include "MFST.h"
+#include "PolishNotation.h"
 
+using std::stack;
+using std::vector;
+using std::string;

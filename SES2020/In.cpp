@@ -1,6 +1,9 @@
 #include "pch.h"
 
-namespace In {
+namespace In 
+{
+
+
 	IN Getin(wchar_t infile[]) {
 		In::IN in;
 		in.size = -1;

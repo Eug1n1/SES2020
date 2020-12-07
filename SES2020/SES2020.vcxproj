@@ -150,6 +150,7 @@
     <ClCompile Include="LT.cpp" />
     <ClCompile Include="MFST.cpp" />
     <ClCompile Include="Parameters.cpp" />
+    <ClCompile Include="PolishNotation.cpp" />
     <ClCompile Include="SES2020.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +166,7 @@
     <ClInclude Include="MFST.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PolishNotation.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="in.txt" />

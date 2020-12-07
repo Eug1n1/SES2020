@@ -1,4 +1,5 @@
-﻿#include "pch.h"
+﻿#pragma once
+#include "pch.h"
 
 bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable)
 {
@@ -316,6 +317,20 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 			}
 			else
 			{
+				if ((in.text[i] == '>' || in.text[i] == '<' || in.text[i] == '=') && in.text[i + 1] == '=')
+				{
+					temp[0] = in.text[i];
+					temp[1] = in.text[i + 1];
+					temp[2] = '\0';
+					i++;
+					if (tokenAnalyse(temp, strNum, lextable, idTable))
+					{
+						temp[0] = '\0';
+						j = 0;
+						continue;
+					}
+				}
+
 				if (in.text[i] == '\'')
 				{
 					temp[j++] = in.text[i++];

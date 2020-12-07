@@ -25,13 +25,27 @@ int _tmain(int argc, _TCHAR* argv[])
 		LT::PrintLexTable(lextable, parm.in);
 		IT::PrintIdTable(idtable, parm.in, lextable);
 
-		MFST_TRACE_START
-			MFST::Mfst mfst(lextable, GRB::getGreibach());
-		mfst.start();
+		for (int i = 0; i < lextable.size; i++)
+		{
+			cout << lextable.table[i].lexema;
+		}
+		cout << endl;
 
-		mfst.saveDeducation();		// сохранить, вывести правила вывода
+		//MFST_TRACE_START
+		//	MFST::Mfst mfst(lextable, GRB::getGreibach());
+		//mfst.start();
 
-		mfst.printRules();			// отладка: вывести правила вывода
+		//mfst.saveDeducation();		// сохранить, вывести правила вывода
+
+		//mfst.printRules();			// отладка: вывести правила вывода
+
+		StartPolish(lextable, idtable);
+
+		for (int i = 0; i < lextable.size; i++)
+		{
+			cout << lextable.table[i].lexema;
+		}
+		cout << endl;
 
 		LT::Delete(lextable);
 		IT::Delete(idtable);
