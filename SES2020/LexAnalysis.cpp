@@ -346,6 +346,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 					if (in.text[i] == '\'')
 					{
 						temp[j] = in.text[i];
+						temp[j + 1] = '\0';
 						if (tokenAnalyse(temp, strNum, lextable, idTable))
 						{
 							temp[0] = '\0'; j = 0;

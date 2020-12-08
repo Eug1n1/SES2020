@@ -25,27 +25,31 @@ int _tmain(int argc, _TCHAR* argv[])
 		LT::PrintLexTable(lextable, parm.in);
 		IT::PrintIdTable(idtable, parm.in, lextable);
 
-		for (int i = 0; i < lextable.size; i++)
-		{
-			cout << lextable.table[i].lexema;
-		}
-		cout << endl;
+		//for (int i = 0; i < lextable.size; i++)
+		//{
+		//	cout << lextable.table[i].lexema;
+		//}
+		//cout << endl;
 
-		//MFST_TRACE_START
-		//	MFST::Mfst mfst(lextable, GRB::getGreibach());
-		//mfst.start();
+		MFST_TRACE_START
+		MFST::Mfst mfst(lextable, GRB::getGreibach());
+		mfst.start();
 
-		//mfst.saveDeducation();		// сохранить, вывести правила вывода
+		mfst.saveDeducation();		// сохранить, вывести правила вывода
 
-		//mfst.printRules();			// отладка: вывести правила вывода
+		mfst.printRules();			// отладка: вывести правила вывода
+
+
+		SemAnalize::SemAnalize(lextable, idtable);
+
 
 		StartPolish(lextable, idtable);
 
-		for (int i = 0; i < lextable.size; i++)
-		{
-			cout << lextable.table[i].lexema;
-		}
-		cout << endl;
+		//for (int i = 0; i < lextable.size; i++)
+		//{
+		//	cout << lextable.table[i].lexema;
+		//}
+		//cout << endl;
 
 		LT::Delete(lextable);
 		IT::Delete(idtable);

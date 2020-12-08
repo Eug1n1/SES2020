@@ -22,6 +22,7 @@
 #include "GRB.h"
 #include "MFST.h"
 #include "PolishNotation.h"
+#include "SemAnalize.h"
 
 using std::stack;
 using std::vector;
