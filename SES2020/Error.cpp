@@ -39,7 +39,18 @@ namespace Error
 		ERROR_ENTRY(129, "Неизвестная переменная"),
 		ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
 		ERROR_ENTRY_NODEF10(160), ERROR_ENTRY_NODEF10(170), ERROR_ENTRY_NODEF10(180), ERROR_ENTRY_NODEF10(190),
-		ERROR_ENTRY_NODEF100(200), ERROR_ENTRY_NODEF100(300), ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
+		ERROR_ENTRY_NODEF100(200), ERROR_ENTRY_NODEF100(300),
+		ERROR_ENTRY(400, "Return не может возвращать функцию"),
+		ERROR_ENTRY(401, "Ошибка в аргументах вызываемой функции функции"),
+		ERROR_ENTRY(402, ""),
+		ERROR_ENTRY(403, ""),
+		ERROR_ENTRY(404, ""),
+		ERROR_ENTRY(405, ""),
+		ERROR_ENTRY(406, ""),
+		ERROR_ENTRY_NODEF(407), ERROR_ENTRY_NODEF(408), ERROR_ENTRY_NODEF(409),
+		ERROR_ENTRY_NODEF10(410), ERROR_ENTRY_NODEF10(420), ERROR_ENTRY_NODEF10(430), ERROR_ENTRY_NODEF10(440), ERROR_ENTRY_NODEF10(450),
+		ERROR_ENTRY_NODEF10(460), ERROR_ENTRY_NODEF10(470), ERROR_ENTRY_NODEF10(480), ERROR_ENTRY_NODEF10(490),
+		ERROR_ENTRY_NODEF100(500),
 		ERROR_ENTRY(600, "Неверная структура программы"),
 		ERROR_ENTRY(601, "Ошибочный сепаратор"),
 		ERROR_ENTRY(602, "Ошибка в выражении"),
@@ -73,7 +84,7 @@ namespace Error
 			err.id = errors[id].id;
 			strcpy_s(err.message, errors[id].message);
 		}
-		err.inext.line = line;
+		err.inext.line = line + 1;
 		err.inext.col = col;
 		return err;
 	}
