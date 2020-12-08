@@ -124,6 +124,11 @@ bool ToPolish(vector<LT::Entry>& source, IT::IdTable& idtable, int& correction)
 				stack.pop();
 			}
 			break;
+		case 'k':
+		case 's':
+			isFunc = true;
+			func = source[i];
+			break;
 		case 'i':
 		case 'l':
 			if (isFunc)

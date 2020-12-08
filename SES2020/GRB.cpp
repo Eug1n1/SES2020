@@ -24,12 +24,12 @@ namespace GRB
 			Rule::Chain(4, TS('r'), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(6, TS('o'), TS('('), NS('E'), TS(')'), TS(';'), NS('N')),
-			Rule::Chain(7, TS('w'), TS('('), NS('E'), TS(')'), TS('{'), NS('N'), TS('}')),
-			Rule::Chain(8, TS('w'), TS('('), NS('E'), TS(')'), TS('{'), NS('N'), TS('}'), NS('N'))
+			Rule::Chain(7, TS('w'), TS('('), NS('E'), TS(')'), TS('['), NS('N'), TS(']')),
+			Rule::Chain(8, TS('w'), TS('('), NS('E'), TS(')'), TS('['), NS('N'), TS(']'), NS('N'))
 		),
 
 		Rule(NS('E'), GRB_ERROR_SERIES + 2, // ошибка в выражении
-			9,  // E-> i| l | (E) | i(W) | iM | lM | (E)M | i(W)M
+			17,  // E-> i| l | (E) | i(W) | iM | lM | (E)M | i(W)M
 			Rule::Chain(1, TS('i')),
 			Rule::Chain(1, TS('l')),
 			Rule::Chain(3, TS('('), NS('E'), TS(')')),
@@ -38,7 +38,16 @@ namespace GRB
 			Rule::Chain(2, TS('l'), NS('M')),
 			Rule::Chain(4, TS('('), NS('E'), TS(')'), NS('M')),
 			Rule::Chain(5, TS('i'), TS('('), NS('W'), TS(')'), NS('M')),
-			Rule::Chain(3, TS('i'), TS('c'), NS('E'))
+			Rule::Chain(3, TS('i'), TS('c'), NS('E')),
+			Rule::Chain(4, TS('s'), TS('('), TS('i'), TS(')')),
+			Rule::Chain(5, TS('s'), TS('('), TS('i'), TS(')'), NS('M')),
+			Rule::Chain(4, TS('s'), TS('('), TS('l'), TS(')')),
+			Rule::Chain(5, TS('s'), TS('('), TS('l'), TS(')'), NS('M')),
+			Rule::Chain(4, TS('k'), TS('('), TS('i'), TS(')')),
+			Rule::Chain(5, TS('k'), TS('('), TS('i'), TS(')'), NS('M')),
+			Rule::Chain(4, TS('k'), TS('('), TS('l'), TS(')')),
+			Rule::Chain(5, TS('k'), TS('('), TS('l'), TS(')'), NS('M'))
+			
 		),
 
 		Rule(NS('M'), GRB_ERROR_SERIES + 2,	// ошибка в выражении

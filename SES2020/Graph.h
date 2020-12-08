@@ -22,6 +22,21 @@
 		FST::NODE(1, FST::RELATION('c', 4)), \
 		FST::NODE() 
 
+#define A_SQUARE(string)string, 7,	\
+		FST::NODE(1, FST::RELATION('s', 1)), \
+		FST::NODE(1, FST::RELATION('q', 2)), \
+		FST::NODE(1, FST::RELATION('u', 3)), \
+		FST::NODE(1, FST::RELATION('a', 4)), \
+		FST::NODE(1, FST::RELATION('r', 5)), \
+		FST::NODE(1, FST::RELATION('e', 6)), \
+		FST::NODE()
+
+#define A_MOD(string)string, 4,	\
+		FST::NODE(1, FST::RELATION('m', 1)), \
+		FST::NODE(1, FST::RELATION('o', 2)), \
+		FST::NODE(1, FST::RELATION('d', 3)), \
+		FST::NODE()
+
 #define A_POO(string) string, 4,	\
 		FST::NODE(1, FST::RELATION('p', 1)),	\
 		FST::NODE(1, FST::RELATION('o', 2)),	\

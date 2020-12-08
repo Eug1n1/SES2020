@@ -78,7 +78,8 @@ namespace MFST
 						saveDiagnosis(NS_NORULECHAIN); rc = restState() ? NS_NORULECHAIN : NS_NORULE;
 					};
 				}
-				else rc = NS_ERROR;
+				else 
+					rc = NS_ERROR;
 			}
 			else if ((st.back() == lenta[lenta_position]))
 			{
