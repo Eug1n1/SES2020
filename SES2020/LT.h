@@ -20,6 +20,8 @@
 #define LEX_BRACELET '}'
 #define LEX_LEFTHESIS '('
 #define LEX_RIGHTHESIS ')'
+#define LEX_LEFTSQBRACKET '['
+#define LEX_RIGHTSQBRACKET ']'
 #define LEX_PLUS '+'
 #define LEX_MINUS '-'
 #define LEX_ASSIGN '='
@@ -29,6 +31,8 @@
 #define LEX_LESSOREQU 'c'
 #define LEX_MOREOREQU 'c'
 #define LEX_TWIRL 'w'
+#define LEX_MOD 'k'
+#define LEX_SQUARE 's'
 
 namespace LT
 {
