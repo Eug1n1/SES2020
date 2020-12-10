@@ -14,6 +14,7 @@ namespace Generator
 		outString += HEAD;
 		outString += GetData(idTable);
 		outString += GetCode(lexTable, idTable);
+//TODO: ВЫЗОВЫ ФУНКЦИЙ ОНИ ВЕДЬ НЕ РАБОТАЮТ
 
 
 		file << outString;
