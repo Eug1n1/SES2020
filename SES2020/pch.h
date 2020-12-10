@@ -23,6 +23,7 @@
 #include "MFST.h"
 #include "PolishNotation.h"
 #include "SemAnalize.h"
+#include "Generator.h"
 
 using std::stack;
 using std::vector;
