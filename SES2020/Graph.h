@@ -123,6 +123,11 @@
 		FST::NODE(1, FST::RELATION('=', 2)), \
 		FST::NODE()
 
+#define A_NONEEQU(string)string, 3,	\
+		FST::NODE(1, FST::RELATION('!', 1)), \
+		FST::NODE(1, FST::RELATION('=', 2)), \
+		FST::NODE()
+
 #define A_MORE(string)string, 2,	\
 		FST::NODE(1, FST::RELATION('>', 1)), \
 		FST::NODE()

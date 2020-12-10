@@ -30,6 +30,7 @@
 #define LEX_MORE 'c'
 #define LEX_LESSOREQU 'c'
 #define LEX_MOREOREQU 'c'
+#define LEX_NONEQU 'c'
 #define LEX_TWIRL 'w'
 #define LEX_MOD 'k'
 #define LEX_SQUARE 's'

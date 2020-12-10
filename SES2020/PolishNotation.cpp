@@ -25,19 +25,23 @@ void StartPolish(LT::LexTable& lextable, IT::IdTable& idtable)
 			i++;
 			correction = 0;
 			lextablePos = i;
+			int tempSize = 0;
 			temp.clear();
 			for (; lextable.table[i].lexema != LEX_SEMICOLON; i++)
 			{
 				temp.push_back(lextable.table[i]);
 			}
 			semiInd = i;
+			tempSize = temp.size();
 			ToPolish(temp, idtable, correction);
+			if (temp.size() != 0)
+				tempSize = temp.size();
 
 			for (int i = lextablePos, k = 0; i < lextablePos + temp.size(); i++, k++)
 			{
 				lextable.table[i] = temp[k];												
 			}
-			lextable.table[lextablePos + temp.size()] = lextable.table[semiInd];
+			lextable.table[lextablePos + tempSize] = lextable.table[semiInd];
 
 			for (int i = 0; i < correction; i++)
 			{
@@ -112,7 +116,7 @@ bool ToPolish(vector<LT::Entry>& source, IT::IdTable& idtable, int& correction)
 			{
 				isFunc = false;
 				correction += 2 + elemCount - 1 - 2;
-				result.push_back({ '@', func.sn, -1 });
+				result.push_back({ '@', func.sn, func.idxTI });
 				result.push_back({ (char)(elemCount + '0'), func.sn, -1});
 				result.push_back(func);
 			}
@@ -126,8 +130,8 @@ bool ToPolish(vector<LT::Entry>& source, IT::IdTable& idtable, int& correction)
 			break;
 		case 'k':
 		case 's':
-			isFunc = true;
-			func = source[i];
+			while (source[i].lexema != LEX_RIGHTHESIS)
+				i++;
 			break;
 		case 'i':
 		case 'l':

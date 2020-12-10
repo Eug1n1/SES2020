@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "pch.h"
 
-bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable)
+bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, int& lit)
 {
 	static flagForTypeOfVar FlagForTypeofVar;
 
@@ -79,6 +79,13 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 		LT::Add(lextable, { LEX_EQU, strNumber, LT_TI_NULLIDX, token });
 		return true;
 	}
+
+	case '!':
+	{
+		LT::Add(lextable, { LEX_NONEQU, strNumber, LT_TI_NULLIDX, token });
+		return true;
+	}
+
 	case 'm':
 	{
 		FST::FST* a_mod = new FST::FST(A_MOD(token));
@@ -185,9 +192,11 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 				LT::Add(lextable, { LEX_LITERAL, strNumber, i });
 			else
 			{
+				string id = "lit" + std::to_string(lit);
+				lit++;
 				IT::Entry entry;
+				strcpy_s(entry.id, id.c_str());
 				memset(entry.parrentFunc, '\0', ID_MAXSIZE);
-				memset(entry.id, '\0', ID_MAXSIZE);
 				entry.iddatatype = IT::IDDATATYPE::STR;
 				entry.idtype = IT::IDTYPE::L;
 				entry.idxfirstLE = lextable.size;
@@ -285,7 +294,9 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 				LT::Add(lextable, { LEX_LITERAL, strNumber, i });
 			else
 			{
-				entry.id[0] = '\0';
+				string id = "lit" + std::to_string(lit);
+				lit++;
+				strcpy_s(entry.id, id.c_str());
 				entry.parrentFunc[0] = '\0';
 				entry.iddatatype = IT::IDDATATYPE::INT;
 				entry.idtype = IT::IDTYPE::L;
@@ -312,6 +323,7 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 }
 void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable)
 {
+	int lit = 0;
 	char* temp = new char[50]{};
 	int strNum = 0;
 	int posInStr = 0;
@@ -332,7 +344,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 				i--;
 				temp[j] = '\0';
 
-				if (tokenAnalyse(temp, strNum, lextable, idTable))
+				if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
 				{
 					temp[0] = '\0';
 					j = 0;
@@ -340,7 +352,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 				}
 				else
 				{
-					throw ERROR_THROW_IN(121, strNum, posInStr);
+					throw ERROR_THROW_IN(121, strNum, posInStr, lit);
 				}
 			}
 			else
@@ -351,7 +363,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 					temp[1] = in.text[i + 1];
 					temp[2] = '\0';
 					i++;
-					if (tokenAnalyse(temp, strNum, lextable, idTable))
+					if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
 					{
 						temp[0] = '\0';
 						j = 0;
@@ -375,7 +387,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 					{
 						temp[j] = in.text[i];
 						temp[j + 1] = '\0';
-						if (tokenAnalyse(temp, strNum, lextable, idTable))
+						if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
 						{
 							temp[0] = '\0'; j = 0;
 							continue;
@@ -396,7 +408,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 					}
 
 					temp[0] = in.text[i]; temp[1] = '\0';
-					if (tokenAnalyse(temp, strNum, lextable, idTable))
+					if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
 						posInStr++;
 					else
 						throw ERROR_THROW_IN(121, strNum, posInStr);
