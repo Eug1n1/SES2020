@@ -22,9 +22,9 @@
 21	dti;
 22	dti;
 23	dti;
-24	i=k(l);
+24	i=k(l,l);
 25	i=l;
-26	i=s(l);
+26	i=s(l,l);
 27	i=l;
 28	i=l;
 29	i=i(i,i);

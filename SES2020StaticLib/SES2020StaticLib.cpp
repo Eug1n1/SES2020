@@ -18,38 +18,16 @@ extern "C"
 		return 0;
 	}
 
-	int __stdcall isqr(unsigned  int b, unsigned   int a)
+	int __stdcall octat(unsigned  int b, unsigned   int a)
 	{
-		int rc;
-		rc = pow(a, b);
+		int rc = b % a;
 		return rc;
 	}
-	int __stdcall isqrt(unsigned  int b, unsigned   int a)
+	int __stdcall elevate(unsigned  int b, unsigned   int a)
 	{
-		int rc;
-		rc = pow(a, (1 / (double)b));
+		int rc = pow(a, b);
 		return rc;
 	}
-	/*int __stdcall sum(unsigned  int b, unsigned   int a)
-	{
-		int rc;
-		rc = a+b;
-		return rc;
-	}
-	int __stdcall diff(unsigned  int b, unsigned   int a)
-	{
-		int rc;
-		rc = a-b;
-		return rc;
-	}
-	int __stdcall less(unsigned  int b, unsigned   int a)
-	{
-		int rc;
-		if (b < a) rc = -1;
-		else if (b == a) rc = 0;
-		else rc = 1;
-		return rc;
-	}*/
 	int __stdcall strl(char* c)
 	{
 		return strlen(c);

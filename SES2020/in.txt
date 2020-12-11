@@ -21,9 +21,9 @@ main
 	poo string sa; 
 	poo string sb; 
 	poo string sc;
-	g = mod(8);
+	g = mod(8, 3);
 	x = 1;
-	y = square(5);
+	y = square(5, 2);
 	sa = '1234567890';
 	sb = '1234567890'; 
 	z = functio(x,y);  

@@ -70,6 +70,7 @@ namespace MFST
 
 	struct Mfst		// магазинный автомат
 	{
+		Parm::PARM parm;
 		enum RC_STEP {	// код возврата функции step
 			NS_OK,		// найдено правило и цепочка, цепочка записана в стек
 			NS_NORULE,	// не найдено правило грамматики (ошибка в грамматике)
@@ -107,7 +108,8 @@ namespace MFST
 		Mfst();
 		Mfst(
 			LT::LexTable plex,	// результат работы лексич. анализатора
-			GRB::Greibach pgreibach // грамматика Грйбах
+			GRB::Greibach pgreibach, // грамматика Грйбах
+			Parm::PARM parm
 		);
 		char* getCSt(char* buf);	// получить содержимое стека
 		char* getCLenta(char* buf, short pos, short n = 25); // лента: n символов с pos

@@ -2,20 +2,27 @@
 .model flat, stdcall
 includelib libucrt.lib
 includelib libucrt.lib
+includelib SES2020StaticLib.lib
 includelib kernel32.lib
 ExitProcess PROTO :DWORD
 .stack 4096
 
+printi PROTO : DWORD
+prints PROTO : DWORD
+octat PROTO : DWORD, : DWORD
+elevate PROTO : DWORD, : DWORD
+
 .const
 		lit0 sdword 	8
-		lit1 sdword 	1
-		lit2 sdword 	5
-		lit3 byte 	'1234567890', 0
-		lit4 byte 	'complete', 0
-		lit5 sdword 	10
-		lit6 sdword 	20
-		lit7 sdword 	2
-		lit8 sdword 	0
+		lit1 sdword 	3
+		lit2 sdword 	1
+		lit3 sdword 	5
+		lit4 sdword 	2
+		lit5 byte 	'1234567890', 0
+		lit6 byte 	'complete', 0
+		lit7 sdword 	10
+		lit8 sdword 	20
+		lit9 sdword 	0
 
 
 .data
@@ -57,22 +64,28 @@ nct ENDP
 
 main PROC
 	push lit0
+	push lit1
+	call octat
+	push eax
 	pop ebx
 	mov g, ebx
 
-	push lit1
+	push lit2
 	pop ebx
 	mov x, ebx
 
-	push lit2
+	push lit3
+	push lit4
+	call elevate
+	push eax
 	pop ebx
 	mov y, ebx
 
-	push offset lit3
+	push offset lit5
 	pop ebx
 	mov sa, ebx
 
-	push offset lit3
+	push offset lit5
 	pop ebx
 	mov sb, ebx
 
@@ -90,13 +103,13 @@ main PROC
 	pop ebx
 	mov sc, ebx
 
-	push offset lit4
+	push offset lit6
 	call prints
-	push lit5
+	push lit7
 	pop ebx
 	mov ab, ebx
 
-	push lit6
+	push lit8
 	pop ebx
 	mov vv, ebx
 
@@ -104,7 +117,7 @@ twirl_start0:
 	cmp ab, vv
 	jg twirl_end0
 	push ab
-	push lit7
+	push lit4
 	pop eax
 	pop ebx
 	add eax, ebx
@@ -120,6 +133,7 @@ twirl_end0:
 	call printi
 	push sc
 	call prints
-push 0
-nct ENDP
-
+	push 0
+	call ExitProcess
+	main ENDP
+	end main

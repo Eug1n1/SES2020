@@ -12,6 +12,7 @@ namespace Generator
 		}
 
 		outString += HEAD;
+		outString += FUNCS;
 		outString += GetData(idTable);
 		outString += GetCode(lexTable, idTable);
 
@@ -31,26 +32,26 @@ namespace Generator
 		string wtrue, wfalse;
 		for (int i = 0; i < lexTable.size; i++)
 		{
-			std::cout << lexTable.table[i].lexema;
 			switch (lexTable.table[i].lexema)
 			{
 			case LEX_BRACELET:
 #pragma region EXIT_FUNC
-				if (isFunc)
+				if (mainFunc)
 				{
-					output += string(idTable.table[lexTable.table[funcIndx].idxTI].id) + " ENDP\n\n";
+					output += "\tcall ExitProcess\n\tmain ENDP\n\tend main\n";
 				}
 				else
 				{
-					output += "call ExitProcess\nmain ENDP\n";
+					output += string(idTable.table[lexTable.table[funcIndx].idxTI].id) + " ENDP\n\n";
 				}
+
 				break;
 #pragma endregion EXIT_FUNC
 
 			case LEX_RETURN:
 #pragma region RETURN
 				if (mainFunc)
-					output += "push 0\n";
+					output += "\tpush 0\n";
 				else
 				{
 					if (idTable.table[lexTable.table[i + 1].idxTI].iddatatype == IT::IDDATATYPE::INT)
@@ -109,6 +110,7 @@ namespace Generator
 
 			case LEX_MAINFUNC:
 #pragma region MAIN
+				funcIndx = i;
 				output += "main PROC\n";
 				mainFunc = true;
 				break;
@@ -149,14 +151,17 @@ namespace Generator
 						output += "\tsub eax, ebx\n";
 						output += "\tpush eax\n";
 						break;
-					case LEX_MOD:
+					case LEX_OCTAT:
 						output += "\tpush " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + "\n\tpush " + string(idTable.table[lexTable.table[i + 4].idxTI].id) + "\n";
-						output += "\tcall mod\n";
+						output += "\tcall octat\n";
 						output += "\tpush eax\n";
 						i += 5;
 						break;
-					case LEX_SQUARE:
-
+					case LEX_ELEVATE:
+						output += "\tpush " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + "\n\tpush " + string(idTable.table[lexTable.table[i + 4].idxTI].id) + "\n";
+						output += "\tcall elevate\n";
+						output += "\tpush eax\n";
+						i += 5;
 						break;
 					}
 					i++;

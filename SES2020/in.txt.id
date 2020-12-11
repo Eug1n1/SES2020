@@ -1,13 +1,14 @@
              ------------- Литералы ------------- 
    Тип данных:                                         Значение:  Длина строки: 
       integer                                                   8
+      integer                                                   3
       integer                                                   1
       integer                                                   5
+      integer                                                   2
        string                                          1234567890             10
        string                                            complete              8
       integer                                                  10
       integer                                                  20
-      integer                                                   2
       integer                                                   0
 ----------------------------------------------------------------------------------------------------
                ------------- Функции -------------
@@ -55,14 +56,15 @@
                   sc                                 76
                  mod                                 23
                 lit0                                 82
-                lit1                                 87
+                lit1                                 84
+                lit2                                 89
               square                                 25
-                lit2                                 93
-                lit3                                 98
-                lit4                                124
-                  ab                                129
-                  vv                                133
-                lit5                                137
-                lit6                                141
-                lit7                                154
-                lit8                                173
+                lit3                                 95
+                lit4                                 97
+                lit5                                102
+                lit6                                128
+                  ab                                133
+                  vv                                137
+                lit7                                141
+                lit8                                145
+                lit9                                177

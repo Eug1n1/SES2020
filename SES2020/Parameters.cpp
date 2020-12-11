@@ -33,6 +33,7 @@ namespace Parm
 			{
 				wcscpy_s(parm.log, buf + wcslen(PARM_LOG));
 				isLog = true;
+				parm.writeLog = true;
 			}
 
 			if (buf = wcsstr(argv[i], PARM_LEX))
@@ -45,6 +46,21 @@ namespace Parm
 			{
 				wcscpy_s(parm.syn, buf + wcslen(PARM_SYN));
 				isSyn = true;
+			}
+
+			if (!wcscmp(argv[i], PARM_DEBUG))
+			{
+				parm.debug = true;
+			}
+
+			if (!wcscmp(argv[i], PARM_LINK))
+			{
+				parm.link = false;
+			}
+
+			if (!wcscmp(argv[i], PARM_LOG))
+			{
+				parm.writeLog = true;
 			}
 		}
 
