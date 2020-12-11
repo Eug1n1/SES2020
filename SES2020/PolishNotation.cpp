@@ -11,7 +11,7 @@ int Prior(char ch)
 	return -1;
 }
 
-void StartPolish(LT::LexTable& lextable, IT::IdTable& idtable)
+void StartPolish(LT::LexTable& lextable, IT::IdTable& idtable, Parm::PARM parm)
 {
 	LT::LexTable newTable = LT::Create(lextable.maxsize);
 	vector<LT::Entry> temp;
@@ -20,7 +20,7 @@ void StartPolish(LT::LexTable& lextable, IT::IdTable& idtable)
 
 	for (int i = 0; i < lextable.size; i++)
 	{
-		if (lextable.table[i].lexema == LEX_ASSIGN) 
+		if (lextable.table[i].lexema == LEX_ASSIGN)
 		{
 			i++;
 			correction = 0;
@@ -39,7 +39,7 @@ void StartPolish(LT::LexTable& lextable, IT::IdTable& idtable)
 
 			for (int i = lextablePos, k = 0; i < lextablePos + temp.size(); i++, k++)
 			{
-				lextable.table[i] = temp[k];												
+				lextable.table[i] = temp[k];
 			}
 			lextable.table[lextablePos + tempSize] = lextable.table[semiInd];
 
@@ -52,10 +52,10 @@ void StartPolish(LT::LexTable& lextable, IT::IdTable& idtable)
 				lextable.size--;
 			}
 
-			printLex(lextable);
-			
+			if (parm.debug)
+				printLexT(lextable);
+
 		}
-		
 	}
 }
 
@@ -117,7 +117,7 @@ bool ToPolish(vector<LT::Entry>& source, IT::IdTable& idtable, int& correction)
 				isFunc = false;
 				correction += 2 + elemCount - 1 - 2;
 				result.push_back({ '@', func.sn, func.idxTI });
-				result.push_back({ (char)(elemCount + '0'), func.sn, -1});
+				result.push_back({ (char)(elemCount + '0'), func.sn, -1 });
 				result.push_back(func);
 			}
 			break;

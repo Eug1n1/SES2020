@@ -5,9 +5,15 @@
 				".model flat, stdcall\n"\
 				"includelib libucrt.lib\n"\
 				"includelib libucrt.lib\n"\
+				"includelib SES2020StaticLib.lib\n"\
 				"includelib kernel32.lib\n"\
 				"ExitProcess PROTO :DWORD\n"\
 				".stack 4096\n\n"
+
+#define FUNCS	"printi PROTO : DWORD\n"\
+				"prints PROTO : DWORD\n"\
+				"octat PROTO : DWORD, : DWORD\n"\
+				"elevate PROTO : DWORD, : DWORD\n\n"
 
 using std::string;
 

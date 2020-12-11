@@ -42,8 +42,9 @@ namespace MFST
 
 	Mfst::Mfst() { lenta = 0; lenta_size = lenta_position = 0; };
 
-	Mfst::Mfst(LT::LexTable plex, GRB::Greibach pgreibach)
+	Mfst::Mfst(LT::LexTable plex, GRB::Greibach pgreibach, Parm::PARM parm)
 	{
+		this->parm = parm;
 		greibach = pgreibach;
 		lex = plex;
 		lenta_size = lex.size;
@@ -68,27 +69,44 @@ namespace MFST
 					GRB::Rule::Chain chain;
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain + 1)) >= 0)
 					{
-						MFST_TRACE1
-						saveState(); st.pop_back(); push_chain(chain); rc = NS_OK;
-						MFST_TRACE2
+						if (parm.debug)
+							MFST_TRACE1
+							saveState();
+						st.pop_back();
+						push_chain(chain);
+						rc = NS_OK;
+						if (parm.debug)
+							MFST_TRACE2
 					}
 					else
 					{
-						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE")
-						saveDiagnosis(NS_NORULECHAIN); rc = restState() ? NS_NORULECHAIN : NS_NORULE;
+						if (parm.debug)
+							MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE")
+							saveDiagnosis(NS_NORULECHAIN); rc = restState() ? NS_NORULECHAIN : NS_NORULE;
 					};
 				}
-				else 
+				else
 					rc = NS_ERROR;
 			}
 			else if ((st.back() == lenta[lenta_position]))
 			{
 				lenta_position++; st.pop_back(); nrulechain = -1; rc = TS_OK;
-				MFST_TRACE3
+				if (parm.debug)
+					MFST_TRACE3
 			}
-			else { MFST_TRACE4("TS_NOK/NS_NORULECHAIN") rc = restState() ? TS_NOK : NS_NORULECHAIN; };
+			else
+			{
+				if (parm.debug)
+					MFST_TRACE4("TS_NOK/NS_NORULECHAIN")
+					rc = restState() ? TS_NOK : NS_NORULECHAIN;
+			};
 		}
-		else { rc = LENTA_END; MFST_TRACE4("LENTA_END") };
+		else
+		{
+			rc = LENTA_END;
+			if (parm.debug)
+				MFST_TRACE4("LENTA_END")
+		};
 		return rc;
 	};
 
@@ -102,7 +120,8 @@ namespace MFST
 	bool Mfst::saveState()
 	{
 		storestate.push_back(MfstState(lenta_position, st, nrule, nrulechain));
-		MFST_TRACE6("SAVESTATE:", storestate.size());
+		if (parm.debug)
+			MFST_TRACE6("SAVESTATE:", storestate.size());
 		return true;
 	};
 
@@ -118,8 +137,12 @@ namespace MFST
 			nrule = state.nrule;
 			nrulechain = state.nrulechain;
 			storestate.pop_back();
-			MFST_TRACE5("RESSTATE")
-			MFST_TRACE2
+			if (parm.debug)
+			{
+				MFST_TRACE5("RESSTATE")
+					MFST_TRACE2
+			}
+
 		};
 		return rc;
 	};
@@ -150,21 +173,38 @@ namespace MFST
 
 		switch (rc_step)
 		{
-		case LENTA_END:	MFST_TRACE4("------>LENTA_END")
-			std::cout << "-------------------------------------------------------------------------" << std::endl;
-			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: всего строк %d, синтаксический анализ выполнен без ошибок", 0, lenta_size);
-			std::cout<<std::setw(4)<<std::left<<0<<": всего строк " << lenta_size<< ", синтаксический анализ выполнен без ошибок" << std::endl;
+		case LENTA_END:
+			if (parm.debug)
+			{
+				MFST_TRACE4("------>LENTA_END")
+					std::cout << "-------------------------------------------------------------------------" << std::endl;
+				sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: всего строк %d, синтаксический анализ выполнен без ошибок", 0, lenta_size);
+				std::cout << std::setw(4) << std::left << 0 << ": всего строк " << lenta_size << ", синтаксический анализ выполнен без ошибок" << std::endl;
+			}
 			rc = true;
 			break;
-		case NS_NORULE:		MFST_TRACE4("------>NS_NORULE")
-			std::cout << "-------------------------------------------------------------------------" << std::endl;
-			std::cout << getDiagnosis(0, buf) << std::endl;
-			std::cout << getDiagnosis(1, buf) << std::endl;
-			std::cout << getDiagnosis(2, buf) << std::endl;
+		case NS_NORULE:
+			if (parm.debug)
+			{
+				MFST_TRACE4("------>NS_NORULE")
+					std::cout << "-------------------------------------------------------------------------" << std::endl;
+				std::cout << getDiagnosis(0, buf) << std::endl;
+				std::cout << getDiagnosis(1, buf) << std::endl;
+				std::cout << getDiagnosis(2, buf) << std::endl;
+			}
 			break;
-		case NS_NORULECHAIN:	 MFST_TRACE4("------>NS_NORULECHAIN") break;
-		case NS_ERROR:		 MFST_TRACE4("------>NS_ERROR") break;
-		case SURPRISE:		 MFST_TRACE4("------>SURPRISE") break;
+		case NS_NORULECHAIN:
+			if (parm.debug)
+				MFST_TRACE4("------>NS_NORULECHAIN")
+				break;
+		case NS_ERROR:
+			if (parm.debug)
+				MFST_TRACE4("------>NS_ERROR")
+				break;
+		case SURPRISE:
+			if (parm.debug)
+				MFST_TRACE4("------>SURPRISE")
+				break;
 		};
 		return rc;
 	};
@@ -225,7 +265,7 @@ namespace MFST
 		deducation.nrulechains = new short[deducation.size];
 		for (unsigned short k = 0; k < storestate.size(); k++)
 		{
-			state = storestate[k];	
+			state = storestate[k];
 			deducation.nrules[k] = state.nrule;
 			deducation.nrulechains[k] = state.nrulechain;
 		};

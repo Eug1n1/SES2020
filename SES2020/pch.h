@@ -25,6 +25,8 @@
 #include "SemAnalize.h"
 #include "Generator.h"
 
+char* fromWide(wchar_t out[]);
+
 using std::stack;
 using std::vector;
 using std::string;

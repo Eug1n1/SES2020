@@ -10,3 +10,4 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idtable
 bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, int& lit);
 bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, flagForTypeOfVar& FlagForTypeofVar);
 void addLibFunc(LT::LexTable& lexTable, IT::IdTable& idTable, char* token, char lexema, int strNumber);
+void printLexT(LT::LexTable lextable);

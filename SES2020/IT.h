@@ -3,7 +3,7 @@
 #include "pch.h"
 #include "LT.h"
 
-#define ID_MAXSIZE 5 //max кол-во символов в id
+#define ID_MAXSIZE 10 //max кол-во символов в id
 #define TI_MAXSIZE 1024 //max кол-во строк в таблице id
 #define TI_INT_DEFAULT 0x00000000 //значение по умолчанию дл€ integer
 #define TI_STR_DEFAULT 0x00		//значение по умолч дл€ string

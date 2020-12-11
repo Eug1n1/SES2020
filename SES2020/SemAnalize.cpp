@@ -119,7 +119,7 @@ void SemAnalize::TypesCheck(LT::LexTable lexT, IT::IdTable idT)
 			datatype = idT.table[lexT.table[i - 1].idxTI].iddatatype;
 			while (lexT.table[i].lexema != LEX_SEMICOLON)
 			{
-				if (lexT.table[i].lexema == 's' || lexT.table[i].lexema == 'q')
+				if (lexT.table[i].lexema == 's' || lexT.table[i].lexema == 'k')
 					i += 3;
 
 				// пролистываем функции
