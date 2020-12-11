@@ -8,7 +8,7 @@ int func functio(int x, int y)
 string func nct(string a, string b)
 {
 	poo string c;
-	c = 'jasdhj';
+	c = a;
 	return c;
 }
  

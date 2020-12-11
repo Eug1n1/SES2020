@@ -1,6 +1,5 @@
              ------------- Литералы ------------- 
    Тип данных:                                         Значение:  Длина строки: 
-       string                                              jasdhj              6
       integer                                                   8
       integer                                                   1
       integer                                                   5
@@ -46,7 +45,6 @@
                    a                                 30
                    b                                 33
                    c                                 38
-                lit0                                 42
                 main                                 48
                    x                                 52
                    y                                 56
@@ -56,15 +54,15 @@
                   sb                                 72
                   sc                                 76
                  mod                                 23
-                lit1                                 82
-                lit2                                 87
+                lit0                                 82
+                lit1                                 87
               square                                 25
-                lit3                                 93
-                lit4                                 98
-                lit5                                124
+                lit2                                 93
+                lit3                                 98
+                lit4                                124
                   ab                                129
                   vv                                133
-                lit6                                137
-                lit7                                141
-                lit8                                154
-                lit9                                173
+                lit5                                137
+                lit6                                141
+                lit7                                154
+                lit8                                173

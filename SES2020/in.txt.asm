@@ -1,23 +1,21 @@
 .586
-	.model flat, stdcall
-	includelib libucrt.lib
-	includelib libucrt.lib
-	includelib kernel32.lib
-	ExitProcess PROTO :DWORD
-
+.model flat, stdcall
+includelib libucrt.lib
+includelib libucrt.lib
+includelib kernel32.lib
+ExitProcess PROTO :DWORD
 .stack 4096
 
 .const
-		lit0 byte 	'jasdhj', 0
-		lit1 sdword 	8
-		lit2 sdword 	1
-		lit3 sdword 	5
-		lit4 byte 	'1234567890', 0
-		lit5 byte 	'complete', 0
-		lit6 sdword 	10
-		lit7 sdword 	20
-		lit8 sdword 	2
-		lit9 sdword 	0
+		lit0 sdword 	8
+		lit1 sdword 	1
+		lit2 sdword 	5
+		lit3 byte 	'1234567890', 0
+		lit4 byte 	'complete', 0
+		lit5 sdword 	10
+		lit6 sdword 	20
+		lit7 sdword 	2
+		lit8 sdword 	0
 
 
 .data
@@ -37,64 +35,87 @@
 functio PROC y:DWORD, x:DWORD
 	push x
 	push y
-	pop z
+	pop eax
+	pop ebx
+	add eax, ebx
+	push eax
+	pop ebx
+	mov z, ebx
 
 	mov eax, z
 	ret
 functio ENDP
 
 nct PROC b:DWORD, a:DWORD
-	push offset lit0
-	pop c
+	push offset a
+	pop ebx
+	mov c, ebx
 
 	mov eax, offset c
 	ret
 nct ENDP
 
 main PROC
+	push lit0
+	pop ebx
+	mov g, ebx
+
 	push lit1
-	pop g
+	pop ebx
+	mov x, ebx
 
 	push lit2
-	pop x
+	pop ebx
+	mov y, ebx
 
-	push lit3
-	pop y
+	push offset lit3
+	pop ebx
+	mov sa, ebx
 
-	push offset lit4
-	pop sa
-
-	push offset lit4
-	pop sb
+	push offset lit3
+	pop ebx
+	mov sb, ebx
 
 	push x
 	push y
 	call functio
 	push eax
-	push functio
-	pop z
+	pop ebx
+	mov z, ebx
 
 	push offset sa
 	push offset sb
 	call nct
 	push eax
-	push offset nct
-	pop sc
+	pop ebx
+	mov sc, ebx
 
-	push offset lit5
+	push offset lit4
 	call prints
+	push lit5
+	pop ebx
+	mov ab, ebx
+
 	push lit6
-	pop ab
+	pop ebx
+	mov vv, ebx
 
-	push lit7
-	pop vv
-
+twirl_start0:
+	cmp ab, vv
+	jg twirl_end0
 	push ab
-	push lit8
-	pop ab
+	push lit7
+	pop eax
+	pop ebx
+	add eax, ebx
+	push eax
+	pop ebx
+	mov ab, ebx
 
 	push ab
 	call printi
+	jmp twirl_start0
+twirl_end0:
 	push z
 	call printi
 	push sc

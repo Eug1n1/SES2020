@@ -28,13 +28,15 @@ namespace Generator
 		stack<LT::Entry> funcParams;
 		bool isFunc = false;
 		bool mainFunc = false;
-		int funcIndx = 0;
+		int funcIndx = 0, twirlCount = 0;
+		string wtrue, wfalse;
 		for (int i = 0; i < lexTable.size; i++)
 		{
 			std::cout << lexTable.table[i].lexema;
 			switch (lexTable.table[i].lexema)
 			{
 			case LEX_BRACELET:
+#pragma region EXIT_FUNC
 				if (isFunc)
 				{
 					output += string(idTable.table[lexTable.table[funcIndx].idxTI].id) + " ENDP\n\n";
@@ -44,8 +46,10 @@ namespace Generator
 					output += "call ExitProcess\nmain ENDP\n";
 				}
 				break;
+#pragma endregion EXIT_FUNC
 
 			case LEX_RETURN:
+#pragma region RETURN
 				if (mainFunc)
 					output += "push 0\n";
 				else
@@ -56,8 +60,10 @@ namespace Generator
 						output += "\tmov eax, offset " + string(idTable.table[lexTable.table[i + 1].idxTI].id) + "\n\tret\n";
 				}
 				break;
+#pragma endregion RETURN
 
 			case LEX_OUT:
+#pragma region OUT
 				if (idTable.table[lexTable.table[i + 2].idxTI].iddatatype == IT::IDDATATYPE::STR)
 				{
 					if (lexTable.table[i + 2].lexema == 'i')
@@ -72,8 +78,10 @@ namespace Generator
 					output += "\tcall printi\n";
 				}
 				break;
+#pragma endregion OUT
 
 			case LEX_ID:
+#pragma region FUNC
 				if (lexTable.table[i - 1].lexema == LEX_FUNCTION)
 				{
 					funcIndx = i;
@@ -98,13 +106,17 @@ namespace Generator
 					output += "\n";
 				}
 				break;
+#pragma endregion FUNC
 
 			case LEX_MAINFUNC:
+#pragma region MAIN
 				output += "main PROC\n";
 				mainFunc = true;
 				break;
+#pragma endregion MAIN
 
 			case LEX_ASSIGN:
+#pragma region ASSIGN
 				idPos = i - 1;
 				while (lexTable.table[i].lexema != LEX_SEMICOLON)
 				{
@@ -122,32 +134,85 @@ namespace Generator
 					case '@':
 						output += "\tcall " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + "\n";
 						output += "\tpush eax\n";
+						i += 2;
 						break;
 
-					case 'v':
-						switch (lexTable.table[i].operation[0])
-						{
-						case '+':
-							output += "\tpop eax\n";
-							output += "\tpop ebx\n";
-							output += "\tadd eax, ebx\n";
-							output += "\tpush eax\n";
-							break;
-						case '-':
-							output += "\tpop ebx\n";
-							output += "\tpop eax\n";
-							output += "\tsub eax, ebx\n";
-							output += "\tpush eax\n";
-							break;
-						}
+					case '+':
+						output += "\tpop eax\n";
+						output += "\tpop ebx\n";
+						output += "\tadd eax, ebx\n";
+						output += "\tpush eax\n";
+						break;
+
+					case '-':
+						output += "\tpop ebx\n";
+						output += "\tpop eax\n";
+						output += "\tsub eax, ebx\n";
+						output += "\tpush eax\n";
+						break;
+
 					}
 					i++;
 				}
-				output += "\tpop " + string(idTable.table[lexTable.table[idPos].idxTI].id) + "\n\n";
+				output += "\tpop ebx\n\tmov " + string(idTable.table[lexTable.table[idPos].idxTI].id) + ", ebx\n\n";
 				break;
+#pragma endregion ASSIGN
 
-			default:
+			case LEX_TWIRL:
+#pragma region TWIRL
+				output += "twirl_start" + std::to_string(twirlCount) + ":\n";
+				output += "\tcmp " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + ", " + string(idTable.table[lexTable.table[i + 4].idxTI].id) + "\n";
+
+				switch (lexTable.table[i + 3].operation[0])
+				{
+				case '=':
+					wtrue = "je";
+					wfalse = "jne";
+					break;
+				case '!':
+					wtrue = "jne";
+					wfalse = "jnz";
+					break;
+				case '>':
+					if (!strcmp(lexTable.table[i + 3].operation, ">="))
+					{
+						wtrue = "jge";
+						wfalse = "jl";
+					}
+					else
+					{
+						wtrue = "jg";
+						wfalse = "jle";
+					}
+					break;
+				case '<':
+					if (!strcmp(lexTable.table[i + 3].operation, "<="))
+					{
+						wtrue = "jle";
+						wfalse = "jg";
+					}
+					else
+					{
+						wtrue = "jl";
+						wfalse = "jge";
+					}
+					break;
+				}
+
+				output += "\t" + wfalse + " twirl_end" + std::to_string(twirlCount) + "\n";
+				i += 6;
 				break;
+#pragma endregion TWIRL
+
+			case LEX_RIGHTSQBRACKET:
+#pragma region TWIRL_END
+
+				output += "\tjmp twirl_start" + std::to_string(twirlCount) + "\n";
+				output += "twirl_end" + std::to_string(twirlCount) + ":\n";
+				twirlCount++;
+				break;
+#pragma endregion TWIRL_END
+
 			}
 		}
 		return output;

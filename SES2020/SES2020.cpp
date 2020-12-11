@@ -13,7 +13,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		log = Log::Getlog(parm.log);
 		Log::WriteLog(log);
 		Log::WriteParm(log, parm);
-		
+
 
 		In::IN in = In::Getin(parm.in);
 		Log::WriteIn(log, in);
@@ -21,6 +21,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		LT::LexTable& lextable = LT::Create(LT_MAXSIZE);
 		IT::IdTable& idtable = IT::Create(TI_MAXSIZE);
 		divisionIntoTokens(in, lextable, idtable);
+
+		for (int i = 0; i < lextable.size; i++)
+		{
+			if (lextable.table[i].lexema == 'c')
+				cout << lextable.table[i].operation;
+		}
+		cout << endl;
 
 		LT::PrintLexTable(lextable, parm.in);
 		IT::PrintIdTable(idtable, parm.in, lextable);
@@ -42,22 +49,35 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//SemAnalize::SemAnalize(lextable, idtable);
 
+		for (int i = 0; i < lextable.size; i++)
+		{
+			if (lextable.table[i].lexema == 'c')
+				cout << lextable.table[i].operation;
+		}
+		cout << endl;
 
 		StartPolish(lextable, idtable);
 
+		//for (int i = 0; i < lextable.size; i++)
+		//{
+		//	cout << lextable.table[i].lexema;
+		//}
+		//cout << endl;
+
 		for (int i = 0; i < lextable.size; i++)
 		{
-			cout << lextable.table[i].lexema;
+			if (lextable.table[i].lexema == 'c')
+				cout << lextable.table[i].operation;
 		}
 		cout << endl;
 
 		Generator::Generate(lextable, idtable, parm);
-
+		//  ml.exe PASasm.asm /link /subsystem:console
 		LT::Delete(lextable);
 		IT::Delete(idtable);
 		Log::Close(log);
 	}
-	catch (Error::ERROR error) 
+	catch (Error::ERROR error)
 	{
 		Log::WriteError(log, error);
 		std::cout << "Ошибка " << error.id << ": " << error.message << ", строка " << error.inext.line;
