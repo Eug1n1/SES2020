@@ -8,7 +8,7 @@ namespace LT
 		{
 			throw ERROR_THROW(113);
 		}
-		LexTable *lt = new LexTable();
+		LexTable* lt = new LexTable();
 		lt->maxsize = size;
 		lt->size = 0;
 		lt->table = new Entry[lt->maxsize];
@@ -23,6 +23,7 @@ namespace LT
 		lextable.table[lextable.size] = entry;
 		lextable.size++;
 	}
+
 	Entry GetEntry(LexTable& lextable, int n)
 	{
 		if(n < lextable.size && n >=0)
@@ -68,5 +69,29 @@ namespace LT
 		(*lexStream) << "\n" << std::setw(100) << std::setfill('-') << "-";
 		lexStream->close();
 		delete lexStream;
+	}
+
+	Entry::Entry(char lexema, int sn, int indxTI, char* operation)
+	{
+		this->lexema = lexema;
+		this->sn = sn;
+		this->idxTI = indxTI;
+		strcpy_s(this->operation, operation);
+	}
+
+	Entry::Entry(char lexema, int sn, int indxTI)
+	{
+		this->lexema = lexema;
+		this->sn = sn;
+		this->idxTI = indxTI;
+		this->operation[0] = '\0';
+	}
+
+	Entry::Entry()
+	{
+		this->lexema = '\0';
+		this->sn = -1;
+		this->idxTI = -1;
+		this->operation[0] = '\0';
 	}
 }

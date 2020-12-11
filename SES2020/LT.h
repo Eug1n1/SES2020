@@ -42,7 +42,11 @@ namespace LT
 		char lexema; //лексема
 		int sn;				//номер строки в исходном тексте
 		int idxTI;  //индекс в таблице идентификаторов или LT_TI_NULLDIX
-		char* operation;
+		char operation[3];
+
+		Entry(char lexema, int sn, int indxTI, char* operation);
+		Entry(char lexema, int sn, int indxTI);
+		Entry();
 	};
 
 	struct LexTable

@@ -1,74 +1,74 @@
 ﻿#pragma once
 #include "pch.h"
 
-bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, int& lit)
+bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, int& lit)
 {
 	static flagForTypeOfVar FlagForTypeofVar;
+	char arr[3];
 
 	switch (token[0])
 	{
 	case LEX_SEMICOLON:
 	{
-		LT::Add(lextable, { LEX_SEMICOLON, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_SEMICOLON, strNumber, LT_TI_NULLIDX ));
 		return true;
 	}
 	case LEX_LEFTSQBRACKET:
-		LT::Add(lextable, { LEX_LEFTSQBRACKET, strNumber, LT_TI_NULLIDX});
+		LT::Add(lextable, LT::Entry(LEX_LEFTSQBRACKET, strNumber, LT_TI_NULLIDX));
 		return true;
 
 	case LEX_RIGHTSQBRACKET:
-		LT::Add(lextable, { LEX_RIGHTSQBRACKET, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_RIGHTSQBRACKET, strNumber, LT_TI_NULLIDX ));
 		return true;
 
 	case LEX_COMMA:
 	{
-		LT::Add(lextable, { LEX_COMMA, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_COMMA, strNumber, LT_TI_NULLIDX ));
 		return true;
 	}
 
 	case LEX_LEFTBRACE:
 	{
-		LT::Add(lextable, { LEX_LEFTBRACE, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_LEFTBRACE, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
 	case LEX_BRACELET:
 	{
-		LT::Add(lextable, { LEX_BRACELET, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_BRACELET, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
 	case LEX_LEFTHESIS:
 	{
-		LT::Add(lextable, { LEX_LEFTHESIS, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_LEFTHESIS, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
 	case LEX_RIGHTHESIS:
 	{
-		LT::Add(lextable, { LEX_RIGHTHESIS, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_RIGHTHESIS, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
 	case '+':
 	{
-		LT::Add(lextable, { LEX_PLUS, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_PLUS, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
 	case '-':
 	{
-		LT::Add(lextable, { LEX_MINUS, strNumber, LT_TI_NULLIDX });
+		LT::Add(lextable, LT::Entry(LEX_MINUS, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
 	case '=':
 	{
 		if (!strcmp(token, "="))
-			LT::Add(lextable, { LEX_ASSIGN, strNumber, LT_TI_NULLIDX });
+			LT::Add(lextable, LT::Entry( LEX_ASSIGN, strNumber, LT_TI_NULLIDX));
 		else
-			LT::Add(lextable, { LEX_EQU, strNumber, LT_TI_NULLIDX, token });
-
+			LT::Add(lextable, LT::Entry(LEX_EQU, strNumber, LT_TI_NULLIDX, token));
 
 		return true;
 	}
@@ -76,13 +76,13 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 	case '<':
 	case '>':
 	{
-		LT::Add(lextable, { LEX_EQU, strNumber, LT_TI_NULLIDX, token });
+		LT::Add(lextable, LT::Entry(LEX_EQU, strNumber, LT_TI_NULLIDX, token));
 		return true;
 	}
 
 	case '!':
 	{
-		LT::Add(lextable, { LEX_NONEQU, strNumber, LT_TI_NULLIDX, token });
+		LT::Add(lextable, LT::Entry( LEX_NONEQU, strNumber, LT_TI_NULLIDX, token ));
 		return true;
 	}
 
@@ -331,7 +331,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 	{
 		if ((in.text[i] >= 'A' && in.text[i] <= 'Z') ||
 			(in.text[i] >= 'a' && in.text[i] <= 'z') ||
-			(in.text[i] >= '0' && in.text[i] <= '9') || in.text[i] == '-')
+			(in.text[i] >= '0' && in.text[i] <= '9'))
 		{
 			temp[j++] = in.text[i];
 			posInStr++;
@@ -357,11 +357,24 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 			}
 			else
 			{
-				if ((in.text[i] == '>' || in.text[i] == '<' || in.text[i] == '=') && in.text[i + 1] == '=')
+				if ((in.text[i] == '>' || in.text[i] == '<' || in.text[i] == '=' || in.text[i] == '!') && in.text[i + 1] == '=')
 				{
 					temp[0] = in.text[i];
 					temp[1] = in.text[i + 1];
 					temp[2] = '\0';
+					i++;
+					if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
+					{
+						temp[0] = '\0';
+						j = 0;
+						continue;
+					}
+				}
+
+				if (in.text[i] == '>' || in.text[i] == '<')
+				{
+					temp[0] = in.text[i];
+					temp[1] = '\0';
 					i++;
 					if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
 					{
