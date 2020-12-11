@@ -149,7 +149,15 @@ namespace Generator
 						output += "\tsub eax, ebx\n";
 						output += "\tpush eax\n";
 						break;
+					case LEX_MOD:
+						output += "\tpush " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + "\n\tpush " + string(idTable.table[lexTable.table[i + 4].idxTI].id) + "\n";
+						output += "\tcall mod\n";
+						output += "\tpush eax\n";
+						i += 5;
+						break;
+					case LEX_SQUARE:
 
+						break;
 					}
 					i++;
 				}

@@ -72,7 +72,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout << endl;
 
 		Generator::Generate(lextable, idtable, parm);
-		//  ml.exe PASasm.asm /link /subsystem:console
+		string compile = "ml.exe ";
+		compile += (char)parm.out;
+		compile += string(" /link /subsystem:console");
+
+		//  
 		LT::Delete(lextable);
 		IT::Delete(idtable);
 		Log::Close(log);

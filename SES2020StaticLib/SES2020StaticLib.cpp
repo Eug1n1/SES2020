@@ -3,28 +3,55 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "SES2020StaticLib.h"
 #include <iostream>
 
-// TODO: Это пример библиотечной функции.
-int pow(int a, int b)
+extern "C"
 {
-	return a ^ b;
-}
+	int __stdcall printi(unsigned  int num)
+	{
+		std::cout << num << std::endl;
+		return 0;
+	}
+	int __stdcall prints(char* str)
+	{
+		std::cout << str << std::endl;
+		return 0;
+	}
 
-int octat(int a, int b) 
-{
-	return a % b;
-}
-
-void outstr(char* s)
-{
-	if (s != nullptr)
-		std::cout << s << std::endl;
-	else
-		std::cout << "Empty line!";
-}
-void outint(int i)
-{
-	std::cout << i << std::endl;
+	int __stdcall isqr(unsigned  int b, unsigned   int a)
+	{
+		int rc;
+		rc = pow(a, b);
+		return rc;
+	}
+	int __stdcall isqrt(unsigned  int b, unsigned   int a)
+	{
+		int rc;
+		rc = pow(a, (1 / (double)b));
+		return rc;
+	}
+	/*int __stdcall sum(unsigned  int b, unsigned   int a)
+	{
+		int rc;
+		rc = a+b;
+		return rc;
+	}
+	int __stdcall diff(unsigned  int b, unsigned   int a)
+	{
+		int rc;
+		rc = a-b;
+		return rc;
+	}
+	int __stdcall less(unsigned  int b, unsigned   int a)
+	{
+		int rc;
+		if (b < a) rc = -1;
+		else if (b == a) rc = 0;
+		else rc = 1;
+		return rc;
+	}*/
+	int __stdcall strl(char* c)
+	{
+		return strlen(c);
+	}
 }
