@@ -7,7 +7,7 @@ namespace Log {
 		log.stream = new std::ofstream;
 		log.stream->open(logfile);
 		if (!log.stream->is_open())
-			throw ERROR_THROW(112);
+			throw ERROR_THROW(6);
 		return log;
 	}
 	void WriteLine(LOG log, const char* c, ...) {

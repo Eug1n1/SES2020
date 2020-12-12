@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#define LEX_ERROR_SERIES 200
 
 struct flagForTypeOfVar
 {

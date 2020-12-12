@@ -14,7 +14,7 @@ namespace In
 		std::ofstream out;
 		file.open(infile, std::ios::ate); //устанавливает указатель в конец файла, поэтому можно узнать его размер
 		if (!file.is_open())
-			throw ERROR_THROW(110);
+			throw ERROR_THROW(5);
 		short size = file.tellg();
 		in.text = new unsigned char[size + 1]; //tellg() - выводит размер файла
 		file.seekg(0, std::ios::beg);
@@ -60,7 +60,7 @@ namespace In
 				}
 				if (in.code[(unsigned char)str[i]] == in.F)
 				{
-					throw ERROR_THROW_IN(111, in.lines - 1, i);
+					throw ERROR_THROW_IN(IN_ERROR_SERIES, in.lines - 1, i);
 				}
 				else if (in.code[(unsigned char)str[i]] == in.I)
 				{

@@ -4,6 +4,7 @@
 #define IN_MAX_LEN_TEXT 1024*1024			
 #define IN_CODE_ENDL '\n'	
 #define IN_CODE_SEPARATOR '|'
+#define IN_ERROR_SERIES 100
 #define IN_CODE_TABLE {\
 	IN::I, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::T, IN::T, IN::F, IN::F, IN::F, IN::F, IN::F, \
 	IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, \
@@ -23,6 +24,8 @@
 	IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, \
 	IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, IN::F, \
 }
+
+
 namespace In
 {
 	struct IN		//исходные данные

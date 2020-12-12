@@ -3,7 +3,7 @@
 
 
 typedef short GRBALPHABET; // символы алфавита грамматики, терминалы > 0, нетерминалы < 0
-#define GRB_ERROR_SERIES 600
+#define GRB_ERROR_SERIES 300
 namespace GRB
 {
 #define NS(n) Rule::Chain::N(n)
