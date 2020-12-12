@@ -15,7 +15,7 @@ namespace Parm
 		for (int i = 1; i < argc; i++) 
 		{
 			if (wcslen(argv[i]) >= PARM_MAX_SIZE)
-				throw ERROR_THROW(104);
+				throw ERROR_THROW(3);
 
 			if (buf = wcsstr(argv[i], PARM_IN))
 			{
@@ -65,7 +65,7 @@ namespace Parm
 		}
 
 		if (!isIn)
-			throw ERROR_THROW(100);
+			throw ERROR_THROW(4);
 
 		if (!isOut) 
 		{

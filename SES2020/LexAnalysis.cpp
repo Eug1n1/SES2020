@@ -352,7 +352,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 				}
 				else
 				{
-					throw ERROR_THROW_IN(121, strNum, posInStr, lit);
+					throw ERROR_THROW_IN(LEX_ERROR_SERIES + 1, strNum, posInStr, lit);
 				}
 			}
 			else
@@ -394,7 +394,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 							temp[j++] = in.text[i++];
 						}
 						else
-							throw ERROR_THROW_IN(126, strNum, posInStr);
+							throw ERROR_THROW_IN(LEX_ERROR_SERIES + 6, strNum, posInStr);
 					}
 					if (in.text[i] == '\'')
 					{
@@ -406,10 +406,10 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 							continue;
 						}
 						else
-							throw ERROR_THROW_IN(121, strNum, posInStr);
+							throw ERROR_THROW_IN(LEX_ERROR_SERIES + 1, strNum, posInStr);
 					}
 					else
-						throw ERROR_THROW_IN(127, strNum, posInStr);
+						throw ERROR_THROW_IN(LEX_ERROR_SERIES + 7, strNum, posInStr);
 				}
 
 				if (in.text[i] != '\n')
@@ -424,7 +424,7 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 					if (tokenAnalyse(temp, strNum, lextable, idTable, lit))
 						posInStr++;
 					else
-						throw ERROR_THROW_IN(121, strNum, posInStr);
+						throw ERROR_THROW_IN(LEX_ERROR_SERIES + 1, strNum, posInStr);
 
 					temp[0] = '\0'; j = 0;
 				}
@@ -501,7 +501,7 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 			else
 			{
 
-				throw ERROR_THROW_IN(123, strNumber, -1);
+				throw ERROR_THROW_IN(LEX_ERROR_SERIES + 3, strNumber, -1);
 			}
 		}
 		//для переменной + проверяется переопределение
@@ -553,7 +553,7 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 						break;
 					}
 					else
-						throw ERROR_THROW_IN(123, strNumber, -1);
+						throw ERROR_THROW_IN(LEX_ERROR_SERIES + 3, strNumber, -1);
 
 				}
 			}
@@ -601,7 +601,7 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 							break;
 						}
 						else
-							throw ERROR_THROW_IN(123, strNumber, -1);
+							throw ERROR_THROW_IN(LEX_ERROR_SERIES + 3, strNumber, -1);
 					}
 				}
 			}
@@ -635,7 +635,7 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 							break;
 						}
 						else
-							throw ERROR_THROW_IN(129, strNumber, -1);
+							throw ERROR_THROW_IN(LEX_ERROR_SERIES + 9, strNumber, -1);
 					}
 
 				}

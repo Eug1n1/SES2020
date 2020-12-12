@@ -129,7 +129,7 @@ void SemAnalize::TypesCheck(LT::LexTable lexT, IT::IdTable idT)
 
 				if (lexT.table[i].lexema == LEX_ID && idT.table[lexT.table[i].idxTI].iddatatype != datatype)
 				{
-					ERROR_THROW_IN(403, str, -1);
+					ERROR_THROW_IN(402, str, -1);
 				}
 				i++;
 			}
@@ -148,7 +148,7 @@ void SemAnalize::TwirlParamsCheck(LT::LexTable lexT, IT::IdTable idT)
 			while (lexT.table[i].lexema != LEX_SEMICOLON)
 			{
 				if ((lexT.table[i].lexema == LEX_ID || lexT.table[i].lexema == LEX_LITERAL) && idT.table[lexT.table[i].idxTI].iddatatype != IT::IDDATATYPE::INT)
-					throw ERROR_THROW_IN(404, lexT.table[i].sn, -1);
+					throw ERROR_THROW_IN(403, lexT.table[i].sn, -1);
 				i++;
 			}
 		}
@@ -179,7 +179,7 @@ void SemAnalize::TwirlCheck(LT::LexTable lexT, IT::IdTable idT)
 				i++;
 			}
 			if (lexT.table[i - 2].lexema != LEX_EQU || count != 2)
-				throw ERROR_THROW_IN(405, lexT.table[i - 2].sn, -1);
+				throw ERROR_THROW_IN(404, lexT.table[i - 2].sn, -1);
 
 			count = 0;
 		}
