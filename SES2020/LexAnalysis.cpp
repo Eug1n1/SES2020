@@ -10,7 +10,7 @@ bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTa
 	{
 	case LEX_SEMICOLON:
 	{
-		LT::Add(lextable, LT::Entry(LEX_SEMICOLON, strNumber, LT_TI_NULLIDX ));
+		LT::Add(lextable, LT::Entry(LEX_SEMICOLON, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 	case LEX_LEFTSQBRACKET:
@@ -18,12 +18,12 @@ bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTa
 		return true;
 
 	case LEX_RIGHTSQBRACKET:
-		LT::Add(lextable, LT::Entry(LEX_RIGHTSQBRACKET, strNumber, LT_TI_NULLIDX ));
+		LT::Add(lextable, LT::Entry(LEX_RIGHTSQBRACKET, strNumber, LT_TI_NULLIDX));
 		return true;
 
 	case LEX_COMMA:
 	{
-		LT::Add(lextable, LT::Entry(LEX_COMMA, strNumber, LT_TI_NULLIDX ));
+		LT::Add(lextable, LT::Entry(LEX_COMMA, strNumber, LT_TI_NULLIDX));
 		return true;
 	}
 
@@ -66,7 +66,7 @@ bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTa
 	case '=':
 	{
 		if (!strcmp(token, "="))
-			LT::Add(lextable, LT::Entry( LEX_ASSIGN, strNumber, LT_TI_NULLIDX));
+			LT::Add(lextable, LT::Entry(LEX_ASSIGN, strNumber, LT_TI_NULLIDX));
 		else
 			LT::Add(lextable, LT::Entry(LEX_EQU, strNumber, LT_TI_NULLIDX, token));
 
@@ -82,7 +82,7 @@ bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTa
 
 	case '!':
 	{
-		LT::Add(lextable, LT::Entry( LEX_NONEQU, strNumber, LT_TI_NULLIDX, token ));
+		LT::Add(lextable, LT::Entry(LEX_NONEQU, strNumber, LT_TI_NULLIDX, token));
 		return true;
 	}
 
@@ -443,6 +443,9 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 }
 bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, flagForTypeOfVar& FlagForTypeOfVar)
 {
+	if (!strcmp(token, "c"))
+		throw ERROR_THROW_IN(LEX_ERROR_SERIES + 10, strNumber, -1);
+
 	FST::FST* identificator = new FST::FST(A_IDENF(token));
 	if (FST::execute(*identificator))
 	{
@@ -523,27 +526,28 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 				{
 					if (IT::IsId(idTable, token, idTable.table[lextable.table[i].idxTI].id) == TI_NULLIDX)
 					{
-						if (FlagForTypeOfVar.type == flagForTypeOfVar::INT)
+						strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
+						for (int j = 0; j < ID_MAXSIZE; j++)
+							entry.id[j] = token[j];
+
+						for (int j = strlen(entry.id), k = 0; k < strlen(entry.parrentFunc); j++, k++)
 						{
-							strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
-							for (int i = 0; i < ID_MAXSIZE; i++)
-								entry.id[i] = token[i];
-							entry.iddatatype = IT::IDDATATYPE::INT;
-							entry.idtype = IT::IDTYPE::V;
-							entry.idxfirstLE = lextable.size;
-							IT::Add(idTable, entry);
+							entry.id[j] = entry.parrentFunc[k];
+							entry.id[j + 1] = '\0';
 						}
 
-						if (FlagForTypeOfVar.type == flagForTypeOfVar::STR)
+						entry.idtype = IT::IDTYPE::V;
+						entry.idxfirstLE = lextable.size;
+
+						if (FlagForTypeOfVar.type == flagForTypeOfVar::INT)
 						{
-							strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
-							for (int i = 0; i < ID_MAXSIZE; i++)
-								entry.id[i] = token[i];
-							entry.iddatatype = IT::IDDATATYPE::STR;
-							entry.idtype = IT::IDTYPE::V;
-							entry.idxfirstLE = lextable.size;
-							IT::Add(idTable, entry);
+							entry.iddatatype = IT::IDDATATYPE::INT;
 						}
+						else if (FlagForTypeOfVar.type == flagForTypeOfVar::STR)
+						{
+							entry.iddatatype = IT::IDDATATYPE::STR;
+						}
+						IT::Add(idTable, entry);
 
 						FlagForTypeOfVar.posInLT = -1;
 						FlagForTypeOfVar.type = flagForTypeOfVar::DEF;
@@ -572,26 +576,29 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 					{
 						if (IT::IsId(idTable, token, idTable.table[lextable.table[i].idxTI].id) == TI_NULLIDX)
 						{
-							if (FlagForTypeOfVar.type == flagForTypeOfVar::INT) {
-								strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
-								for (int i = 0; i < ID_MAXSIZE; i++)
-									entry.id[i] = token[i];
-								entry.iddatatype = IT::IDDATATYPE::INT;
-								entry.idtype = IT::IDTYPE::P;
-								entry.idxfirstLE = lextable.size;
-								IT::Add(idTable, entry);
+							strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
+							for (int j = 0; j < ID_MAXSIZE; j++)
+								entry.id[j] = token[j];
+
+							for (int j = strlen(entry.id), k = 0; k < strlen(idTable.table[lextable.table[i].idxTI].id); j++, k++)
+							{
+								entry.id[j] = idTable.table[lextable.table[i].idxTI].id[k];
+								entry.id[j + 1] = '\0';
 							}
 
-							if (FlagForTypeOfVar.type == flagForTypeOfVar::STR)
-							{
-								strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
-								for (int i = 0; i < ID_MAXSIZE; i++)
-									entry.id[i] = token[i];
-								entry.iddatatype = IT::IDDATATYPE::STR;
-								entry.idtype = IT::IDTYPE::P;
-								entry.idxfirstLE = lextable.size;
-								IT::Add(idTable, entry);
+							if (FlagForTypeOfVar.type == flagForTypeOfVar::INT) {
+								entry.iddatatype = IT::IDDATATYPE::INT;
 							}
+							else if (FlagForTypeOfVar.type == flagForTypeOfVar::STR)
+							{
+								entry.iddatatype = IT::IDDATATYPE::STR;
+							}
+
+							entry.idtype = IT::IDTYPE::P;
+							entry.idxfirstLE = lextable.size;
+							IT::Add(idTable, entry);
+
+
 
 							FlagForTypeOfVar.posInLT = -1;
 							FlagForTypeOfVar.type = flagForTypeOfVar::DEF;
@@ -610,6 +617,7 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 		if (!alreadyChecked)
 		{
 			bool isLeftBraceWas = false;
+			int startPos = lextable.size - 1;
 			for (int i = lextable.size - 1; i > 0; i--)
 			{
 				if (LT::GetEntry(lextable, i).lexema == LEX_LEFTBRACE)
@@ -619,7 +627,18 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 					(LT::GetEntry(lextable, i).lexema == LEX_ID || LT::GetEntry(lextable, i).lexema == LEX_MAINFUNC) &&
 					idTable.table[lextable.table[i].idxTI].idtype == IT::IDTYPE::F)
 				{
-					int tempIndex = IT::IsId(idTable, token, idTable.table[lextable.table[i].idxTI].id);
+					char* temp = token;
+					int funcPos = isFunc(idTable, token);
+					if (funcPos == -1)
+					{
+						for (int j = strlen(token), k = 0; k < strlen(idTable.table[lextable.table[i].idxTI].id); j++, k++)
+						{
+							temp[j] = idTable.table[lextable.table[i].idxTI].id[k];
+							temp[j + 1] = '\0';
+						}
+					}
+
+					int tempIndex = IT::IsId(idTable, temp, idTable.table[lextable.table[i].idxTI].id);
 					if (tempIndex != TI_NULLIDX)
 					{
 						LT::Add(lextable, { LEX_ID, strNumber, tempIndex });
@@ -690,4 +709,14 @@ void printLexT(LT::LexTable lextable)
 		}
 	}
 	std::cout << "\n\n";
+}
+
+int isFunc(IT::IdTable idtable, char* id)
+{
+	for (int i = 0; i < idtable.size; i++)
+	{
+		if (!strcmp(idtable.table[i].id, id) && idtable.table[i].idtype == IT::IDTYPE::F)
+			return i;
+	}
+	return -1;
 }

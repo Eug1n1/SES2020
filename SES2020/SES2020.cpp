@@ -59,7 +59,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			system(compile.c_str());
 		}
 
-
+		//FIXME: конфликт параметров функции с уже объявленными переменными
 		LT::Delete(lextable);
 		IT::Delete(idtable);
 		Log::Close(log);

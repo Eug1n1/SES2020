@@ -7,9 +7,9 @@ int func functio(int x, int y)
  
 string func nct(string a, string b)
 {
-	poo string c;
-	c = a;
-	return c;
+	poo string cn;
+	cn = a;
+	return cn;
 }
  
 main

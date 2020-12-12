@@ -39,7 +39,7 @@ namespace Generator
 #pragma region EXIT_FUNC
 				if (mainFunc)
 				{
-					output += "\tcall ExitProcess\n\tmain ENDP\n\tend main\n";
+					output += "\tcall ExitProcess\nmain ENDP\nend main\n";
 				}
 				else
 				{
@@ -128,7 +128,7 @@ namespace Generator
 					case LEX_LITERAL:
 					case LEX_ID:
 
-						if (idTable.table[lexTable.table[i].idxTI].iddatatype == IT::IDDATATYPE::INT)
+						if (idTable.table[lexTable.table[i].idxTI].iddatatype == IT::IDDATATYPE::INT || idTable.table[lexTable.table[i].idxTI].idtype == IT::IDTYPE::P)
 							output += "\tpush " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
 						else
 							output += "\tpush offset " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
@@ -174,7 +174,9 @@ namespace Generator
 			case LEX_TWIRL:
 #pragma region TWIRL
 				output += "twirl_start" + std::to_string(twirlCount) + ":\n";
-				output += "\tcmp " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + ", " + string(idTable.table[lexTable.table[i + 4].idxTI].id) + "\n";
+				output += "\tmov eax, " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + string("\n");
+				output += "\tmov ebx, " + string(idTable.table[lexTable.table[i + 4].idxTI].id) + string("\n");
+				output += "\tcmp eax, ebx\n";
 
 				switch (lexTable.table[i + 3].operation[0])
 				{

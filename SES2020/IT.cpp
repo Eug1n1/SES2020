@@ -14,6 +14,7 @@ namespace IT
 		it->table = new Entry[it->maxsize];
 		return *it;
 	}
+
 	void Add(IdTable& idtable, Entry entry)
 	{
 		if (idtable.size < idtable.maxsize)
@@ -31,6 +32,7 @@ namespace IT
 		else 
 			throw ERROR_THROW(122);
 	}
+
 	Entry GetEntry(IdTable& idtable, int n)
 	{
 		if (n >= 0 && n < idtable.size)
@@ -38,6 +40,7 @@ namespace IT
 		else
 			throw ERROR_THROW(124);
 	}
+
 	int IsId(IdTable& idtable, char id[ID_MAXSIZE])
 	{
 		for (int i = 0; i < idtable.size; i++)

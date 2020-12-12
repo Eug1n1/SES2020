@@ -12,3 +12,4 @@ bool tokenAnalyse(char* token, int strNumber, LT::LexTable& lextable, IT::IdTabl
 bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, flagForTypeOfVar& FlagForTypeofVar);
 void addLibFunc(LT::LexTable& lexTable, IT::IdTable& idTable, char* token, char lexema, int strNumber);
 void printLexT(LT::LexTable lextable);
+int isFunc(IT::IdTable idtable, char* id);
