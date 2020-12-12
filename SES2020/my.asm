@@ -26,39 +26,39 @@ elevate PROTO : DWORD, : DWORD
 
 
 .data
-		z 	sdword 	0
-		c 	dword 	?
-		x 	sdword 	0
-		y 	sdword 	0
-		z 	sdword 	0
-		g 	sdword 	0
-		sa 	dword 	?
-		sb 	dword 	?
-		sc 	dword 	?
-		ab 	sdword 	0
-		vv 	sdword 	0
+		zfunctio 	sdword 	0
+		cnnct 	dword 	?
+		xmain 	sdword 	0
+		ymain 	sdword 	0
+		zmain 	sdword 	0
+		gmain 	sdword 	0
+		samain 	dword 	?
+		sbmain 	dword 	?
+		scmain 	dword 	?
+		abmain 	sdword 	0
+		vvmain 	sdword 	0
 
 .code
-functio PROC y:DWORD, x:DWORD
-	push x
-	push y
+functio PROC yfunctio:DWORD, xfunctio:DWORD
+	push xfunctio
+	push yfunctio
 	pop eax
 	pop ebx
 	add eax, ebx
 	push eax
 	pop ebx
-	mov z, ebx
+	mov zfunctio, ebx
 
-	mov eax, z
+	mov eax, zfunctio
 	ret
 functio ENDP
 
-nct PROC b:DWORD, a:DWORD
-	push offset a
+nct PROC bnct:DWORD, anct:DWORD
+	push anct
 	pop ebx
-	mov c, ebx
+	mov cnnct, ebx
 
-	mov eax, offset c
+	mov eax, offset cnnct
 	ret
 nct ENDP
 
@@ -68,72 +68,74 @@ main PROC
 	call octat
 	push eax
 	pop ebx
-	mov g, ebx
+	mov gmain, ebx
 
 	push lit2
 	pop ebx
-	mov x, ebx
+	mov xmain, ebx
 
 	push lit3
 	push lit4
 	call elevate
 	push eax
 	pop ebx
-	mov y, ebx
+	mov ymain, ebx
 
 	push offset lit5
 	pop ebx
-	mov sa, ebx
+	mov samain, ebx
 
 	push offset lit5
 	pop ebx
-	mov sb, ebx
+	mov sbmain, ebx
 
-	push x
-	push y
+	push xmain
+	push ymain
 	call functio
 	push eax
 	pop ebx
-	mov z, ebx
+	mov zmain, ebx
 
-	push offset sa
-	push offset sb
+	push offset samain
+	push offset sbmain
 	call nct
 	push eax
 	pop ebx
-	mov sc, ebx
+	mov scmain, ebx
 
 	push offset lit6
 	call prints
 	push lit7
 	pop ebx
-	mov ab, ebx
+	mov abmain, ebx
 
 	push lit8
 	pop ebx
-	mov vv, ebx
+	mov vvmain, ebx
 
 twirl_start0:
-	cmp ab, vv
+	mov eax, abmain
+	mov ebx, vvmain
+	cmp eax, ebx
 	jg twirl_end0
-	push ab
+	push abmain
 	push lit4
 	pop eax
 	pop ebx
 	add eax, ebx
 	push eax
 	pop ebx
-	mov ab, ebx
+	mov abmain, ebx
 
-	push ab
+	push abmain
 	call printi
 	jmp twirl_start0
 twirl_end0:
-	push z
+	push zmain
 	call printi
-	push sc
+	push scmain
 	call prints
 	push 0
 	call ExitProcess
-	main ENDP
-	end main
+main ENDP
+end main
