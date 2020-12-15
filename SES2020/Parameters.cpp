@@ -36,18 +36,6 @@ namespace Parm
 				parm.writeLog = true;
 			}
 
-			if (buf = wcsstr(argv[i], PARM_LEX))
-			{
-				wcscpy_s(parm.lex, buf + wcslen(PARM_LEX));
-				isLex = true;
-			}
-
-			if (buf = wcsstr(argv[i], PARM_SYN))
-			{
-				wcscpy_s(parm.syn, buf + wcslen(PARM_SYN));
-				isSyn = true;
-			}
-
 			if (!wcscmp(argv[i], PARM_DEBUG))
 			{
 				parm.debug = true;
@@ -76,16 +64,6 @@ namespace Parm
 		{
 			wcscpy_s(parm.log, parm.in);
 			wcsncat_s(parm.log, PARM_LOG_DEFAULT_EXT, wcslen(PARM_LOG_DEFAULT_EXT));
-		}
-		if (!isLex)
-		{
-			wcscpy_s(parm.lex, parm.in);
-			wcsncat_s(parm.lex, PARM_LOG_DEFAULT_EXT, wcslen(PARM_LOG_DEFAULT_EXT));	//PARM_LEX_DEFAULT_EXT
-		}
-		if (!isSyn)
-		{
-			wcscpy_s(parm.syn, parm.in);
-			wcsncat_s(parm.syn, PARM_SYN_DEFAULT_EXT, wcslen(PARM_SYN_DEFAULT_EXT));
 		}
 		
 		return parm;

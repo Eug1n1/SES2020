@@ -15,7 +15,7 @@
 #define PARM_ID_DEFAULT_EXT L".id"
 #define PARM_DEBUG L"-d"
 #define PARM_LINK L"-c"
-#define PARM_LOG L"-log"
+#define PARM_LOG L"-lex"
 
 
 namespace Parm
@@ -25,8 +25,6 @@ namespace Parm
 		wchar_t  in[PARM_MAX_SIZE];			// -in:     имя файла исходного кода
 		wchar_t out[PARM_MAX_SIZE];			// -out:    имя файла объектного кода
 		wchar_t log[PARM_MAX_SIZE];			// -log:    имя файла протокола
-		wchar_t lex[PARM_MAX_SIZE];
-		wchar_t syn[PARM_MAX_SIZE];
 		bool writeLog = false;
 		bool debug = false;
 		bool link = true;
