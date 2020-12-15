@@ -37,11 +37,11 @@
 
 namespace LT
 {
-	struct Entry //строка таблицы лексем
+	struct Entry
 	{
-		char lexema; //лексема
-		int sn;				//номер строки в исходном тексте
-		int idxTI;  //индекс в таблице идентификаторов или LT_TI_NULLDIX
+		char lexema;
+		int sn;				
+		int idxTI;  
 		char operation[3];
 
 		Entry(char lexema, int sn, int indxTI, char* operation);
@@ -51,10 +51,12 @@ namespace LT
 
 	struct LexTable
 	{
-		int maxsize;	//ёмкость таблицы лексем < LT_MAXSIZE
-		int size;		//текущий размер таблицы лексем < maxsize
-		Entry* table;	//массив строк таблицы лексем
+		int maxsize;	
+		int size;		
+		Entry* table;	
 	};
+
+
 	LexTable& Create( //создать таблицу лексем
 		int size	 //ёмкость таблицы лексем < LT_MAXSIZE
 	);

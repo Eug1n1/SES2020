@@ -53,13 +53,25 @@ int _tmain(int argc, _TCHAR* argv[])
 		out += string("out: ") + string(fromWide(parm.out)) + string("\n");
 		std::cout << out;
 
+		string compile = "";
+		char* parmout = new char[wcslen(parm.out)];
+		for (int i = 0; i < wcslen(parm.out); i++)
+		{
+			parmout[i] = parm.out[i];
+			parmout[i + 1] = '\0';
+		}
+
 		if (parm.link)
 		{
-			string compile = "ml.exe " + (char)parm.out + string(" /link /subsystem:console");
+			compile += string("ml.exe ") + string(parmout) + string(" /link /subsystem:console");
+			system(compile.c_str());
+		}
+		else
+		{
+			compile += string("ml.exe ") + string(parmout) + string(" /c /coff");
 			system(compile.c_str());
 		}
 
-		//FIXME: конфликт параметров функции с уже объявленными переменными
 		LT::Delete(lextable);
 		IT::Delete(idtable);
 		Log::Close(log);
