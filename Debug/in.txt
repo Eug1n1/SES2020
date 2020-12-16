@@ -42,7 +42,7 @@ main
 		out();
 	]
 	out(z);
-	out()
+	out();
 	out(sc);
 	return 0;
 }

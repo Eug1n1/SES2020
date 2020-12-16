@@ -40,7 +40,7 @@ newline PROTO
 		vvmain 	sdword 	0
 
 .code
-functio PROC yfunctio:DWORD, xfunctio:DWORD
+functio0 PROC yfunctio:DWORD, xfunctio:DWORD
 	push xfunctio
 	push yfunctio
 	pop eax
@@ -52,16 +52,16 @@ functio PROC yfunctio:DWORD, xfunctio:DWORD
 
 	mov eax, zfunctio
 	ret
-functio ENDP
+functio0 ENDP
 
-nct PROC bnct:DWORD, anct:DWORD
+nct1 PROC bnct:DWORD, anct:DWORD
 	push anct
 	pop ebx
 	mov cnnct, ebx
 
 	mov eax,  cnnct
 	ret
-nct ENDP
+nct1 ENDP
 
 main PROC
 	push lit0
@@ -92,14 +92,14 @@ main PROC
 
 	push xmain
 	push ymain
-	call functio
+	call functio0
 	push eax
 	pop ebx
 	mov zmain, ebx
 
 	push samain
 	push sbmain
-	call nct
+	call nct1
 	push eax
 	pop ebx
 	mov scmain, ebx
