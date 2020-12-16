@@ -443,9 +443,6 @@ void divisionIntoTokens(In::IN& in, LT::LexTable& lextable, IT::IdTable& idTable
 }
 bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable& idTable, flagForTypeOfVar& FlagForTypeOfVar)
 {
-	if (!strcmp(token, "c"))
-		throw ERROR_THROW_IN(LEX_ERROR_SERIES + 10, strNumber, -1);
-
 	FST::FST* identificator = new FST::FST(A_IDENF(token));
 	if (FST::execute(*identificator))
 	{
@@ -526,9 +523,16 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 				{
 					if (IT::IsId(idTable, token, idTable.table[lextable.table[i].idxTI].id) == TI_NULLIDX)
 					{
+						if (strlen(token) > 10)
+							throw ERROR_THROW_IN(208, strNumber, -1);
+
 						strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
-						for (int j = 0; j < ID_MAXSIZE; j++)
+						for (int j = 0; j < strlen(token); j++)
+						{
 							entry.id[j] = token[j];
+							entry.id[j + 1] = '\0';
+						}
+
 
 						for (int j = strlen(entry.id), k = 0; k < strlen(entry.parrentFunc); j++, k++)
 						{
@@ -576,9 +580,15 @@ bool a_func_var(char* token, int strNumber, LT::LexTable& lextable, IT::IdTable&
 					{
 						if (IT::IsId(idTable, token, idTable.table[lextable.table[i].idxTI].id) == TI_NULLIDX)
 						{
+							if (strlen(token) > 10)
+								throw ERROR_THROW_IN(208, strNumber, -1);
+
 							strcpy_s(entry.parrentFunc, idTable.table[lextable.table[i].idxTI].id);
-							for (int j = 0; j < ID_MAXSIZE; j++)
+							for (int j = 0; j < strlen(token); j++)
+							{
 								entry.id[j] = token[j];
+								entry.id[j + 1] = '\0';
+							}
 
 							for (int j = strlen(entry.id), k = 0; k < strlen(idTable.table[lextable.table[i].idxTI].id); j++, k++)
 							{

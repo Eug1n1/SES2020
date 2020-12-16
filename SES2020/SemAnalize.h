@@ -9,7 +9,8 @@ namespace SemAnalize
 	void FuncsTypeCheck(LT::LexTable lexT, IT::IdTable idT);
 	void TypesCheck(LT::LexTable lexT, IT::IdTable idT);
 	void TwirlParamsCheck(LT::LexTable lexT, IT::IdTable idT);
-	void TwirlCheck(LT::LexTable lexT, IT::IdTable idT);
+	void MainCheck(LT::LexTable lexT, IT::IdTable idT);
+	void IdsCheck(LT::LexTable lexT, IT::IdTable idT);
 }
 
 

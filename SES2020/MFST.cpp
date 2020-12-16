@@ -188,9 +188,9 @@ namespace MFST
 			{
 				MFST_TRACE4("------>NS_NORULE")
 					std::cout << "-------------------------------------------------------------------------" << std::endl;
+				/*std::cout << getDiagnosis(0, buf) << std::endl;
+				std::cout << getDiagnosis(1, buf) << std::endl;*/
 				std::cout << getDiagnosis(0, buf) << std::endl;
-				std::cout << getDiagnosis(1, buf) << std::endl;
-				std::cout << getDiagnosis(2, buf) << std::endl;
 			}
 			break;
 		case NS_NORULECHAIN:
@@ -237,9 +237,10 @@ namespace MFST
 		if (n < MFST_DIAGN_NUMBER && (lpos = diagnosis[n].lenta_position) >= 0)
 		{
 			errid = greibach.getRule(diagnosis[n].nrule).iderror;
-			Error::ERROR err = Error::geterror(errid);
+			throw ERROR_THROW_IN(errid, lex.table[lpos].sn, -1);
+			/*Error::ERROR err = Error::geterror(errid);
 			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d, %s", err.id, lex.table[lpos].sn, err.message);
-			rc = buf;
+			rc = buf;*/
 		};
 		return rc;
 	};

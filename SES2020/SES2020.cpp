@@ -81,18 +81,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		Log::WriteError(log, error);
 		std::cout << "Ошибка " << error.id << ": " << error.message << ", строка " << error.inext.line;
 	}
-	catch (...)
-	{
-		cout << "something wrong" << endl;
-	}
-
 }
 
 char* fromWide(wchar_t out[])
 {
 	char* parmbuf = new char[wcslen(out)];
 	for (int i = 0; i < wcslen(out); i++)
-		parmbuf[i] = out[i];
+		parmbuf[i] = (char)out[i];
 	parmbuf[wcslen(out)] = '\0';
 
 	return parmbuf;

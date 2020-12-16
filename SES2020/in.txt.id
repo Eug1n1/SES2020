@@ -1,0 +1,70 @@
+             ------------- Литералы ------------- 
+   Тип данных:                                         Значение:  Длина строки: 
+      integer                                                   8
+      integer                                                   3
+      integer                                                   1
+      integer                                                   5
+      integer                                                   2
+       string                                          1234567890             10
+       string                                            complete              8
+      integer                                                  10
+      integer                                                  20
+      integer                                                   0
+----------------------------------------------------------------------------------------------------
+               ------------- Функции -------------
+     Идентификатор: Тип возвращаемого значения: 
+             functio                 integer 
+                 nct                  string 
+                main                 integer 
+                 mod                 integer 
+              square                 integer 
+----------------------------------------------------------------------------------------------------
+            ------------- Переменные -------------
+               Блок-родитель:      Идентификатор:    Тип данных:      Тип идентификатора:                                         Значение:  Длина строки: 
+                       functio            xfunctio       integer                  параметр                                                 0
+                       functio            yfunctio       integer                  параметр                                                 0
+                       functio            zfunctio       integer                переменная                                                 0
+                           nct                anct        string                  параметр                                                                0
+                           nct                bnct        string                  параметр                                                                0
+                           nct               cnnct        string                переменная                                                                0
+                          main               xmain       integer                переменная                                                 0
+                          main               ymain       integer                переменная                                                 0
+                          main               zmain       integer                переменная                                                 0
+                          main               gmain       integer                переменная                                                 0
+                          main              samain        string                переменная                                                                0
+                          main              sbmain        string                переменная                                                                0
+                          main              scmain        string                переменная                                                                0
+                          main              abmain       integer                переменная                                                 0
+                          main              vvmain       integer                переменная                                                 0
+----------------------------------------------------------------------------------------------------
+       Идентификатор     Индекс первого вхождения в ТЛ:
+             functio                                  2
+            xfunctio                                  5
+            yfunctio                                  8
+            zfunctio                                 13
+                 nct                                 27
+                anct                                 30
+                bnct                                 33
+               cnnct                                 38
+                main                                 48
+               xmain                                 52
+               ymain                                 56
+               zmain                                 60
+               gmain                                 64
+              samain                                 68
+              sbmain                                 72
+              scmain                                 76
+                 mod                                 23
+                lit0                                 82
+                lit1                                 84
+                lit2                                 89
+              square                                 25
+                lit3                                 95
+                lit4                                 97
+                lit5                                102
+                lit6                                128
+              abmain                                133
+              vvmain                                137
+                lit7                                141
+                lit8                                145
+                lit9                                185
