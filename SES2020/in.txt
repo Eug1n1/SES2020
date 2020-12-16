@@ -1,0 +1,49 @@
+int func functio(int x, int y) 
+{
+  poo int z;
+  z = x + y;
+  return z;
+}
+ 
+string func nct(string a, string b)
+{
+	poo string cn;
+	cn = a;
+	return cn;
+}
+ 
+main
+{ 
+	poo int x; 
+	poo int y;
+	poo int z;
+	poo int g;
+	poo string sa; 
+	poo string sb; 
+	poo string sc;
+	g = mod(8, 3);
+	x = 1;
+	y = square(5, 2);
+	sa = '1234567890';
+	sb = '1234567890'; 
+	z = functio(x,y);  
+	sc = nct(sa,sb);
+	out('complete'); 
+
+	poo int ab;
+	poo int vv;
+	ab = 10;
+	vv = 20;
+	
+	twirl(ab <= vv)
+	[
+		out();
+		ab = ab + 2;
+		out(ab);
+	]
+
+	out();
+	out(z);
+	out(sc);
+	return 0;
+}
