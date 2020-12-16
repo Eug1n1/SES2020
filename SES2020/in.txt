@@ -37,10 +37,12 @@ main
 	
 	twirl(ab <= vv)
 	[
+		out();
 		ab = ab + 2;
 		out(ab);
 	]
 
+	out();
 	out(z);
 	out(sc);
 	return 0;

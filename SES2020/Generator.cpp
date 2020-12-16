@@ -57,13 +57,20 @@ namespace Generator
 					if (idTable.table[lexTable.table[i + 1].idxTI].iddatatype == IT::IDDATATYPE::INT)
 						output += "\tmov eax, " + string(idTable.table[lexTable.table[i + 1].idxTI].id) + "\n\tret\n";
 					if (idTable.table[lexTable.table[i + 1].idxTI].iddatatype == IT::IDDATATYPE::STR)
-						output += "\tmov eax, offset " + string(idTable.table[lexTable.table[i + 1].idxTI].id) + "\n\tret\n";
+						output += "\tmov eax,  " + string(idTable.table[lexTable.table[i + 1].idxTI].id) + "\n\tret\n";
 				}
 				break;
 #pragma endregion RETURN
 
 			case LEX_OUT:
 #pragma region OUT
+				if (lexTable.table[i + 2].lexema == LEX_RIGHTHESIS)
+				{
+					output += "\tcall newline\n";
+					i += 2;
+					continue;
+				}
+
 				if (idTable.table[lexTable.table[i + 2].idxTI].iddatatype == IT::IDDATATYPE::STR)
 				{
 					if (lexTable.table[i + 2].lexema == 'i')
@@ -127,10 +134,37 @@ namespace Generator
 					case LEX_LITERAL:
 					case LEX_ID:
 
-						if (idTable.table[lexTable.table[i].idxTI].iddatatype == IT::IDDATATYPE::INT || idTable.table[lexTable.table[i].idxTI].idtype == IT::IDTYPE::P)
+						if (idTable.table[lexTable.table[i].idxTI].idtype == IT::IDTYPE::P)
+						{
+							if (idTable.table[lexTable.table[i].idxTI].idtype == IT::IDTYPE::L)
+							{
+								if (idTable.table[lexTable.table[i].idxTI].iddatatype == IT::IDDATATYPE::STR)
+									output += "\tpush offset " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
+								else
+									output += "\tpush " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
+
+							}
+							else
+							{
+								output += "\tpush " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
+							}
+							i++;
+							continue;
+						}
+
+						if (idTable.table[lexTable.table[i].idxTI].idtype == IT::IDTYPE::L)
+						{
+							if (idTable.table[lexTable.table[i].idxTI].iddatatype == IT::IDDATATYPE::STR)
+								output += "\tpush offset " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
+							else
+								output += "\tpush " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
+
+						}
+						if(idTable.table[lexTable.table[i].idxTI].idtype == IT::IDTYPE::V)
+						{
 							output += "\tpush " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
-						else
-							output += "\tpush offset " + string(idTable.table[lexTable.table[i].idxTI].id) + "\n";
+						}
+
 						break;
 					case '@':
 						output += "\tcall " + string(idTable.table[lexTable.table[i + 2].idxTI].id) + "\n";

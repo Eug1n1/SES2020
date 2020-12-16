@@ -9,15 +9,18 @@ extern "C"
 {
 	int __stdcall printi(unsigned  int num)
 	{
-		std::cout << num << std::endl;
+		std::cout << num;
 		return 0;
 	}
 	int __stdcall prints(char* str)
 	{
-		std::cout << str << std::endl;
+		std::cout << str;
 		return 0;
 	}
-
+	void __stdcall newline()
+	{
+		std::cout << std::endl;
+	}
 	int __stdcall octat(unsigned  int b, unsigned   int a)
 	{
 		int rc = b % a;

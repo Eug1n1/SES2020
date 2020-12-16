@@ -172,7 +172,7 @@
 
 #define A_STRING_LITERAL(string) string, 3,	\
 	FST::NODE(1, FST::RELATION('\'', 1)),	\
-	FST::NODE(77,	FST::RELATION(' ', 1),	\
+	FST::NODE(78,	FST::RELATION(' ', 1),	\
 					FST::RELATION('A', 1),	\
 					FST::RELATION('B', 1),	\
 					FST::RELATION('C', 1),	\
@@ -248,5 +248,6 @@
 					FST::RELATION(',', 1),	\
 					FST::RELATION('?', 1),	\
 					FST::RELATION('!', 1),	\
+					FST::RELATION('\\', 1),\
 					FST::RELATION('\'', 2)),\
 				FST::NODE()

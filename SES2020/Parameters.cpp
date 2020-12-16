@@ -46,7 +46,7 @@ namespace Parm
 				parm.link = false;
 			}
 
-			if (!wcscmp(argv[i], PARM_LOG))
+			if (!wcscmp(argv[i], PARM_LEX))
 			{
 				parm.writeLog = true;
 			}

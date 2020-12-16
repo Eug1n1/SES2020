@@ -81,11 +81,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		Log::WriteError(log, error);
 		std::cout << "Ошибка " << error.id << ": " << error.message << ", строка " << error.inext.line;
 	}
-	catch (...)
-	{
-		cout << "something wrong" << endl;
-	}
-
 }
 
 char* fromWide(wchar_t out[])

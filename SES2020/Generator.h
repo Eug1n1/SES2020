@@ -13,7 +13,8 @@
 #define FUNCS	"printi PROTO : DWORD\n"\
 				"prints PROTO : DWORD\n"\
 				"octat PROTO : DWORD, : DWORD\n"\
-				"elevate PROTO : DWORD, : DWORD\n\n"
+				"elevate PROTO : DWORD, : DWORD\n"\
+				"newline PROTO\n\n"
 
 using std::string;
 

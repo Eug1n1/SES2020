@@ -11,6 +11,7 @@ printi PROTO : DWORD
 prints PROTO : DWORD
 octat PROTO : DWORD, : DWORD
 elevate PROTO : DWORD, : DWORD
+newline PROTO
 
 .const
 		lit0 sdword 	8
@@ -58,7 +59,7 @@ nct PROC bnct:DWORD, anct:DWORD
 	pop ebx
 	mov cnnct, ebx
 
-	mov eax, offset cnnct
+	mov eax,  cnnct
 	ret
 nct ENDP
 
@@ -96,8 +97,8 @@ main PROC
 	pop ebx
 	mov zmain, ebx
 
-	push offset samain
-	push offset sbmain
+	push samain
+	push sbmain
 	call nct
 	push eax
 	pop ebx
@@ -118,6 +119,7 @@ twirl_start0:
 	mov ebx, vvmain
 	cmp eax, ebx
 	jg twirl_end0
+	call newline
 	push abmain
 	push lit4
 	pop eax
@@ -131,6 +133,7 @@ twirl_start0:
 	call printi
 	jmp twirl_start0
 twirl_end0:
+	call newline
 	push zmain
 	call printi
 	push scmain

@@ -15,7 +15,7 @@
 #define PARM_ID_DEFAULT_EXT L".id"
 #define PARM_DEBUG L"-d"
 #define PARM_LINK L"-c"
-#define PARM_LOG L"-lex"
+#define PARM_LEX L"-lex"
 
 
 namespace Parm
