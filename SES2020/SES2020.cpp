@@ -87,7 +87,7 @@ char* fromWide(wchar_t out[])
 {
 	char* parmbuf = new char[wcslen(out)];
 	for (int i = 0; i < wcslen(out); i++)
-		parmbuf[i] = out[i];
+		parmbuf[i] = (char)out[i];
 	parmbuf[wcslen(out)] = '\0';
 
 	return parmbuf;
