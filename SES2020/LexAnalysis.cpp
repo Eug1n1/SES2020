@@ -294,6 +294,9 @@ bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTa
 				LT::Add(lextable, { LEX_LITERAL, strNumber, i });
 			else
 			{
+				int num = atoi(token);
+				if (num < 0 || num > 4294967295)
+					throw ERROR_THROW_IN( 210, strNumber,-1)
 				string id = "lit" + std::to_string(lit);
 				lit++;
 				strcpy_s(entry.id, id.c_str());
@@ -302,7 +305,7 @@ bool tokenAnalyse(char token[3], int strNumber, LT::LexTable& lextable, IT::IdTa
 				entry.idtype = IT::IDTYPE::L;
 				entry.idxfirstLE = lextable.size;
 				IT::Add(idTable, entry);
-				idTable.table[idTable.size - 1].value.vint = atoi(token);
+				idTable.table[idTable.size - 1].value.vint = num;
 				LT::Add(lextable, { LEX_LITERAL, strNumber, idTable.size - 1 });
 			}
 
