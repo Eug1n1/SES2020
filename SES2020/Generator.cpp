@@ -10,11 +10,12 @@ namespace Generator
 		{
 			throw ERROR_THROW(2);
 		}
-
+		ChangeIds(idTable);
 		outString += HEAD;
 		outString += FUNCS;
 		outString += GetData(idTable);
 		outString += GetCode(lexTable, idTable);
+//TODO: ВЫЗОВЫ ФУНКЦИЙ ОНИ ВЕДЬ НЕ РАБОТАЮТ
 
 
 		file << outString;
@@ -303,4 +304,28 @@ namespace Generator
 
 		return constants + "\n\n" + variables;
 	}
+
+	void ChangeIds(IT::IdTable& idTable)
+	{
+		int count = 48;
+		int val = 0;
+		for (int i = 0; i < idTable.size; i++)
+		{
+			if (idTable.table[i].idtype == IT::IDTYPE::F && idTable.table[i].id != "main")
+			{
+				if (count == 123)
+					throw ERROR_THROW(406);
+				while ((count < 48 || count >57) && (count < 65 || count > 90) && (count < 97 || count > 122))
+				{
+					count++;
+				}
+				val = strlen(idTable.table[i].id);
+				idTable.table[i].id[val] = count;
+				count++;
+				idTable.table[i].id[val + 1] = '\0';
+			}
+		}
+	}
 }
+
+

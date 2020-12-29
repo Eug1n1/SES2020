@@ -23,4 +23,5 @@ namespace Generator
 	void Generate(LT::LexTable lexTable, IT::IdTable idTable, Parm::PARM parm);
 	string GetData(IT::IdTable idTable);
 	string GetCode(LT::LexTable lexTable, IT::IdTable idTable);
+	void ChangeIds(IT::IdTable& idTable);
 }

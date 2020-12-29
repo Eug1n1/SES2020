@@ -1,0 +1,4 @@
+D:\cpp_projs\SES2020\Debug\SES2020StaticLib.pdb
+D:\cpp_projs\SES2020\SES2020StaticLib\Debug\SES2020StaticLib.pdb
+C:\Projs\SES2020\Debug\SES2020StaticLib.pdb
+C:\Projs\SES2020\SES2020StaticLib\Debug\SES2020StaticLib.pdb
