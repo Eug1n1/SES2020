@@ -17,13 +17,14 @@ newline PROTO
 		lit0 sdword 	8
 		lit1 sdword 	3
 		lit2 sdword 	1
-		lit3 sdword 	5
-		lit4 sdword 	2
-		lit5 byte 	'1234567890', 0
-		lit6 byte 	'Hello world', 0
-		lit7 sdword 	10
-		lit8 sdword 	20
-		lit9 sdword 	0
+		lit3 sdword 	4
+		lit4 sdword 	5
+		lit5 sdword 	2
+		lit6 byte 	'1234567890', 0
+		lit7 byte 	'complete', 0
+		lit8 sdword 	10
+		lit9 sdword 	20
+		lit10 sdword 	0
 
 
 .data
@@ -72,21 +73,34 @@ main PROC
 	mov gmain, ebx
 
 	push lit2
+	push lit0
+	push lit1
+	call functio0
+	push eax
+	pop eax
+	pop ebx
+	add eax, ebx
+	push eax
+	push lit3
+	pop eax
+	pop ebx
+	add eax, ebx
+	push eax
 	pop ebx
 	mov xmain, ebx
 
-	push lit3
 	push lit4
+	push lit5
 	call elevate
 	push eax
 	pop ebx
 	mov ymain, ebx
 
-	push offset lit5
+	push offset lit6
 	pop ebx
 	mov samain, ebx
 
-	push offset lit5
+	push offset lit6
 	pop ebx
 	mov sbmain, ebx
 
@@ -104,14 +118,13 @@ main PROC
 	pop ebx
 	mov scmain, ebx
 
-	push offset lit6
+	push offset lit7
 	call prints
-	call newline
-	push lit7
+	push lit8
 	pop ebx
 	mov abmain, ebx
 
-	push lit8
+	push lit9
 	pop ebx
 	mov vvmain, ebx
 
@@ -120,8 +133,9 @@ twirl_start0:
 	mov ebx, vvmain
 	cmp eax, ebx
 	jg twirl_end0
+	call newline
 	push abmain
-	push lit4
+	push lit5
 	pop eax
 	pop ebx
 	add eax, ebx
@@ -131,9 +145,9 @@ twirl_start0:
 
 	push abmain
 	call printi
-	call newline
 	jmp twirl_start0
 twirl_end0:
+	call newline
 	push zmain
 	call printi
 	call newline

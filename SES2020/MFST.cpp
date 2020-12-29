@@ -190,8 +190,8 @@ namespace MFST
 					std::cout << "-------------------------------------------------------------------------" << std::endl;
 				/*std::cout << getDiagnosis(0, buf) << std::endl;
 				std::cout << getDiagnosis(1, buf) << std::endl;*/
-				std::cout << getDiagnosis(0, buf) << std::endl;
 			}
+				std::cout << getDiagnosis(0, buf) << std::endl;
 			break;
 		case NS_NORULECHAIN:
 			if (parm.debug)

@@ -118,7 +118,7 @@ twirl_start0:
 	mov eax, abmain
 	mov ebx, vvmain
 	cmp eax, ebx
-	jg twirl_end0
+	 twirl_end0
 	call newline
 	push abmain
 	push lit4
@@ -136,6 +136,7 @@ twirl_end0:
 	call newline
 	push zmain
 	call printi
+	call newline
 	push scmain
 	call prints
 	push 0

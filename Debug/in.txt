@@ -13,8 +13,8 @@ string func nct(string a, string b)
 }
  
 main
-{
-	poo int x;
+{ 
+	poo int x; 
 	poo int y;
 	poo int z;
 	poo int g;
@@ -22,14 +22,14 @@ main
 	poo string sb; 
 	poo string sc;
 	g = mod(8, 3);
-	x = 1;
+	x = 1 + functio(8, 3) + 4;
 	y = square(5, 2);
 	sa = '1234567890';
 	sb = '1234567890'; 
 	z = functio(x,y);  
 	sc = nct(sa,sb);
-	out('Hello world'); 
-	out();
+	out('complete'); 
+
 	poo int ab;
 	poo int vv;
 	ab = 10;
@@ -37,10 +37,12 @@ main
 	
 	twirl(ab <= vv)
 	[
+		out();
 		ab = ab + 2;
 		out(ab);
-		out();
 	]
+
+	out();
 	out(z);
 	out();
 	out(sc);

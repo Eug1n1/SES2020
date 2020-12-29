@@ -5,7 +5,7 @@ namespace GRB
 {
 	Greibach greibach(
 		NS('S'), TS('$'), // стартовый символ, дно стека
-		6,
+		7,
 		Rule(NS('S'), GRB_ERROR_SERIES + 0, // неверная структура программы
 			2,		// S-> m{NrE;}; | tfi(F){NrE;};S | m{NrE;};S | tfi(F){NrE;};
 			Rule::Chain(4, TS('m'), TS('{'), NS('N'), TS('}')),
@@ -24,8 +24,8 @@ namespace GRB
 			Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
 			Rule::Chain(6, TS('o'), TS('('), NS('E'), TS(')'), TS(';'), NS('N')),
 			Rule::Chain(5, TS('o'), TS('('), TS(')'), TS(';'), NS('N')),
-			Rule::Chain(7, TS('w'), TS('('), NS('E'), TS(')'), TS('['), NS('N'), TS(']')),
-			Rule::Chain(8, TS('w'), TS('('), NS('E'), TS(')'), TS('['), NS('N'), TS(']'), NS('N'))
+			Rule::Chain(7, TS('w'), TS('('), NS('C'), TS(')'), TS('['), NS('N'), TS(']')),
+			Rule::Chain(8, TS('w'), TS('('), NS('C'), TS(')'), TS('['), NS('N'), TS(']'), NS('N'))
 		),
 
 		Rule(NS('E'), GRB_ERROR_SERIES + 2, // ошибка в выражении
@@ -80,6 +80,14 @@ namespace GRB
 			Rule::Chain(1, TS('l')),
 			Rule::Chain(3, TS('i'), TS(','), NS('W')),
 			Rule::Chain(3, TS('l'), TS(','), NS('W'))
+		),
+
+		Rule(NS('C'), GRB_ERROR_SERIES + 5,	// ошибка в условии цикла
+			4,	// W-> i | l | i,W | l,W
+			Rule::Chain(3, TS('i'), TS('c'), TS('i')),
+			Rule::Chain(3, TS('l'), TS('c'), TS('l')),
+			Rule::Chain(3, TS('l'), TS('c'), TS('i')),
+			Rule::Chain(3, TS('i'), TS('c'), TS('l'))
 		)
 	);
 

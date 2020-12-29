@@ -35,7 +35,7 @@ main
 	ab = 10;
 	vv = 20;
 	
-	twirl(ab <= vv)
+	twirl(ab + vv)
 	[
 		out();
 		ab = ab + 2;
@@ -44,6 +44,7 @@ main
 
 	out();
 	out(z);
+	out();
 	out(sc);
 	return 0;
 }
